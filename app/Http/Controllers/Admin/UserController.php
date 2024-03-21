@@ -75,7 +75,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        if (!$user->isUser())
+        if (!$user->is('lider'))
             abort(404);
 
         return Inertia::render('Admin/Users/Form', [
@@ -90,7 +90,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        if (!$user->isUser())
+        if (!$user->is('lider'))
             abort(404);
 
         $data = $request->all();

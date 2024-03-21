@@ -53,10 +53,6 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->role == $profile;
     }
-    public function isUser() : bool
-    {
-        return $this->role == 'user';
-    }
 
     public function scopeAdmins($q)
     {
