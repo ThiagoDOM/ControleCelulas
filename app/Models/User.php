@@ -49,9 +49,9 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @return bool
      */
-    public function isAdmin() : bool
+    public function is($profile) : bool
     {
-        return $this->role == 'admin';
+        return $this->role == $profile;
     }
     public function isUser() : bool
     {
@@ -64,6 +64,6 @@ class User extends Authenticatable implements MustVerifyEmail
     }
     public function scopeUsers($q)
     {
-        $q->where('role', 'user');
+        $q->where('role', 'lider');
     }
 }

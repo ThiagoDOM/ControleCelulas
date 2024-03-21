@@ -54,7 +54,7 @@ class UserController extends Controller
         $data = $request->all();
 
         $data['password'] = bcrypt($data['password']);
-        $data['role'] = 'user';
+        $data['role'] = 'lider';
         $user = User::create($data);
 
         return Redirect::route('admin.users.edit', $user->id);
@@ -124,7 +124,7 @@ class UserController extends Controller
         //     'role' => ['required', 'in:admin'],
         // ]);
 
-        if (!$admin->isAdmin() || $admin->id == auth()->user()->id) {
+        if (!$admin->is('admin') || $admin->id == auth()->user()->id) {
 
             // return Redirect::back()->with('errors', 'Error adding ad');
             return response()->json([], 401);

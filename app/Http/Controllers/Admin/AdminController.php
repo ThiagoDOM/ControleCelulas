@@ -72,7 +72,7 @@ class AdminController extends Controller
     {
         $admin = User::findOrFail($id);
 
-        if (!$admin->isAdmin())
+        if (!$admin->is('admin'))
             abort(404);
 
         return Inertia::render('Admin/Admins/Form', [
@@ -87,7 +87,7 @@ class AdminController extends Controller
     {
         $admin = User::findOrFail($id);
 
-        if (!$admin->isAdmin())
+        if (!$admin->is('admin'))
             abort(404);
 
         $data = $request->all();
@@ -121,7 +121,7 @@ class AdminController extends Controller
         //     'role' => ['required', 'in:admin'],
         // ]);
 
-        if (!$admin->isAdmin() || $admin->id == auth()->user()->id) {
+        if (!$admin->is('admin') || $admin->id == auth()->user()->id) {
 
             // return Redirect::back()->with('errors', 'Error adding ad');
             return response()->json([], 401);

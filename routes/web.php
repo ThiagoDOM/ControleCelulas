@@ -37,7 +37,7 @@ Route::get('/home', function () {
 Route::get('/email-test', fn () => "Just simple email test.")
     ->middleware(['auth', 'verified'])->name('email-test');
 
-Route::middleware('admin')->name('admin.')->prefix('admin')->group(function () {
+Route::middleware(['auth','admin'])->name('admin.')->prefix('admin')->group(function () {
     Route::get('/dashboard', function () {
         return Inertia::render('Admin/Dashboard');
     })->name('dashboard');

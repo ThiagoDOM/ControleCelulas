@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class VerifyIsAdmin
+class VerifyIsLider
 {
     /**
      * Handle an incoming request.
@@ -15,7 +15,7 @@ class VerifyIsAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if($request->user() && $request->user()->is('admin'))
+        if($request->user() && $request->user()->is('lider'))
             return $next($request);
         else
             return abort(404);
