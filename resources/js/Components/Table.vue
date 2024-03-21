@@ -71,7 +71,7 @@ const itemSelected = ref(null);
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
-                    <th v-for="column in columns" :key="column.key" scope="col" class="px-6 py-3 cursor-pointer"
+                    <th v-for="column in columns" :key="column.key" scope="col" class="px-6 py-3 cursor-pointer truncate"
                         :class="{ 'text-gray-500 dark:text-gray-200': form.order_key == column.key }"
                         @click="changeOrder(column.key)">
                         {{ column.name }}
