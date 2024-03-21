@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\FuncHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Http\Resources\UserResource;
@@ -11,7 +12,7 @@ use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
-class UserController extends Controller
+class PastorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,14 +20,14 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $users = User::query();
-        $users->users();
+        $users->pastores();
         if ($request->name)
             $users->where('name', 'LIKE', "%$request->name%");
 
         if($request->order_key)
             $users->orderBy($request->order_key, $request->order == "true" ? "DESC" : "ASC");
 
-        return Inertia::render('Admin/Users/List', [
+        return Inertia::render('Admin/Pastores/List', [
             'query' => $request->all(),
             'users' => UserResource::collection(
                 $users->latest()->paginate()->withQueryString()
@@ -41,7 +42,7 @@ class UserController extends Controller
     {
         $user = new User();
 
-        return Inertia::render('Admin/Users/Form', [
+        return Inertia::render('Admin/Pastores/Form', [
             'user' => $user
         ]);
     }
@@ -54,10 +55,11 @@ class UserController extends Controller
         $data = $request->all();
 
         $data['password'] = bcrypt($data['password']);
-        $data['role'] = 'lider';
+        $data['role'] = 'pastor';
+        $data['telefone'] = FuncHelper::desmascararTelefone($data['telefone']);
         $user = User::create($data);
 
-        return Redirect::route('admin.users.edit', $user->id);
+        return Redirect::route('admin.pastores.edit', $user->id);
     }
 
     /**
@@ -75,10 +77,10 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        if (!$user->is('lider'))
+        if (!$user->is('pastor'))
             abort(404);
 
-        return Inertia::render('Admin/Users/Form', [
+        return Inertia::render('Admin/Pastores/Form', [
             'user' => $user
         ]);
     }
@@ -90,7 +92,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        if (!$user->is('lider'))
+        if (!$user->is('pastor'))
             abort(404);
 
         $data = $request->all();
@@ -98,6 +100,8 @@ class UserController extends Controller
             unset($data['password']);
         else
             $data['password'] = bcrypt($data['password']);
+
+        $data['telefone'] = FuncHelper::desmascararTelefone($data['telefone']);
 
         $user->fill($data);
 
@@ -107,7 +111,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return Redirect::route('admin.users.edit', $user->id);
+        return Redirect::route('admin.pastores.edit', $user->id);
     }
 
     /**
@@ -115,22 +119,12 @@ class UserController extends Controller
      */
     public function destroy(Request $request, string $id)
     {
-        $admin = User::findOrFail($id);
-        // $request['id'] = $id;
-        // $request['role'] = $admin->role;
+        $user = User::findOrFail($id);
 
-        // $request->validate([
-        //     'id' => ['required', 'not_in:1'],
-        //     'role' => ['required', 'in:admin'],
-        // ]);
+        if (!$user->is('pastor'))
+            abort(404);
 
-        if (!$admin->is('admin') || $admin->id == auth()->user()->id) {
 
-            // return Redirect::back()->with('errors', 'Error adding ad');
-            return response()->json([], 401);
-        } else {
-            $admin->delete();
-            // return response()->json('Deleted with success!');
-        }
+        return $user->delete();
     }
 }

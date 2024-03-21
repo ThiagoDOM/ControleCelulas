@@ -26,12 +26,13 @@ const options = {
 const form = useForm({
     name: usePage().props?.user.name ?? '',
     email: usePage().props?.user.email ?? '',
+    telefone: usePage().props?.user.telefone ?? '',
     password: '',
     password_confirmation: '',
 });
 
 const updateUser = () => {
-    form.patch(route('admin.users.update', usePage().props.user.id), {
+    form.patch(route('admin.pastores.update', usePage().props.user.id), {
         preserveScroll: true,
         onSuccess: () => resetForm(),
         onError: () => {
@@ -41,7 +42,7 @@ const updateUser = () => {
 };
 
 const createUser = () => {
-    form.post(route('admin.users.store'), {
+    form.post(route('admin.pastores.store'), {
         preserveScroll: true,
         onSuccess: () => resetForm(true),
         onError: () => {
@@ -89,16 +90,23 @@ const resetForm = (created = false) => {
                                 <InputLabel for="email" value="Email" />
 
                                 <TextInput id="email" type="email" class="mt-1 block w-full" v-model="form.email" required
-                                    autocomplete="username" />
+                                    autocomplete="username" placeholder="email@email.com"/>
 
                                 <InputError class="mt-2" :message="form.errors.email" />
+                            </div>
+                            <div>
+                                <InputLabel for="telefone" value="Telefone" />
+
+                                <TextInput id="telefone" type="text" class="mt-1 block w-full" v-model="form.telefone" autocomplete="telefone" placeholder="(##) #####-####" mask="(##) #####-####" />
+
+                                <InputError class="mt-2" :message="form.errors.telefone" />
                             </div>
 
                             <div>
                                 <InputLabel for="password" value="New Password" />
 
                                 <TextInput id="password" ref="passwordInput" v-model="form.password" type="password"
-                                    class="mt-1 block w-full" autocomplete="new-password" />
+                                    class="mt-1 block w-full" autocomplete="new-password" placeholder="****"/>
 
                                 <InputError :message="form.errors.password" class="mt-2" />
                             </div>
@@ -107,7 +115,7 @@ const resetForm = (created = false) => {
                                 <InputLabel for="password_confirmation" value="Confirm Password" />
 
                                 <TextInput id="password_confirmation" v-model="form.password_confirmation" type="password"
-                                    class="mt-1 block w-full" autocomplete="new-password" />
+                                    class="mt-1 block w-full" autocomplete="new-password"/>
 
                                 <InputError :message="form.errors.password_confirmation" class="mt-2" />
                             </div>

@@ -25,17 +25,22 @@ class UserRequest extends FormRequest
      */
     public function rules(): array
     {
-        $id = request()->route('admin') ?? request()->route('user');
-        $requestUpdate = [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)->ignore($id)],
-            'password' => ['nullable', 'confirmed', Rules\Password::defaults()],
-        ];
-        $requestCreate = [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ];
-        return request()->method() == 'PATCH' ? $requestUpdate : $requestCreate;
+        if(request()->method() == 'PATCH'){
+            $id = request()->route('admin') ?? request()->route('pastore') ?? request()->route('discipuladore') ?? request()->route('lidere');
+            $request = [
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)->ignore($id)],
+                'telefone' => 'nullable',
+                'password' => ['nullable', 'confirmed', Rules\Password::defaults()],
+            ];
+        } else {
+            $request = [
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)],
+                'telefone' => 'nullable',
+                'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            ];
+        }
+        return $request;
     }
 }

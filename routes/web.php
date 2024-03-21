@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\PastorController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -43,7 +44,7 @@ Route::middleware(['auth','admin'])->name('admin.')->prefix('admin')->group(func
     })->name('dashboard');
 
     Route::resource('admins', AdminController::class);
-    Route::resource('users', UserController::class);
+    Route::resource('pastores', PastorController::class);
 });
 //Auth and Profile Routes
 Route::middleware('auth')->group(function () {

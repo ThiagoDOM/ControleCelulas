@@ -55,14 +55,14 @@ const itemSelected = ref(null);
 <template>
     <form class="flex" @submit.prevent="form.get(route(routeBase + '.index'))">
         <TextInput id="current_password" ref="currentPasswordInput" v-model="form.name" type="text"
-            class="mt-1 md:w-60 w-full" placeholder="Name" />
+            class="mt-1 md:w-60 w-full" placeholder="Nome" />
         <div class="flex-row-reverse">
             <button type="submit" class="ml-3 mr-3 mt-3"><font-awesome-icon
                     :icon="['fas', 'magnifying-glass']" /></button>
         </div>
         <div class="ml-auto mt-2">
             <Link v-if="route().has(routeBase + '.create')" :href="route(routeBase + '.create')">
-            <PrimaryButton>Create</PrimaryButton>
+            <PrimaryButton>Cadastrar</PrimaryButton>
             </Link>
         </div>
     </form>
@@ -77,7 +77,7 @@ const itemSelected = ref(null);
                         {{ column.name }}
                         <span :class="{'invisible': form.order_key != column.key}">{{ form.order ? '↑' : '↓' }}</span>
                     </th>
-                    <th scope="col" class="px-6 py-3">Action</th>
+                    <th scope="col" class="px-6 py-3">Ação</th>
                 </tr>
             </thead>
             <tbody>
