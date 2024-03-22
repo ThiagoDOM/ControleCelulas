@@ -60,7 +60,7 @@ const closeModal = () => {
     emit('close');
 }
 const successModal = () => {
-    $toast.success("Item deleted with success!", options);
+    $toast.success("Item excluído com sucesso!", options);
     emit('success');
     closeModal();
 }

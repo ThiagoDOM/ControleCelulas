@@ -89,9 +89,9 @@ const itemSelected = ref(null);
                     <td v-for="column in columns" :key="column.key" class="px-6 py-4"
                         :class="{ 'font-medium text-gray-900 whitespace-nowrap dark:text-white': column.key == 'id' }">
                         {{ item[column.key] }}</td>
-                    <td class="px-6 py-4">
+                    <td class="px-6 py-4 inline-flex">
                         <Link v-if="route().has(routeBase + '.edit', item.id)"
-                            :href="route(routeBase + '.edit', item.id)">
+                            :href="route(routeBase + '.edit', item.id)" class="mr-3 sm:mr-0">
                         <SecondaryButton><font-awesome-icon :icon="['fas', 'pencil']" /></SecondaryButton>
                         </Link>
                         <DangerButton v-if="route().has(routeBase + '.destroy', item.id)" class="ms-0 sm:ms-3"
