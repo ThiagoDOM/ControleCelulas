@@ -91,4 +91,7 @@ const submit = () => {
             </div>
         </form>
     </GuestLayout>
+    <div class="fixed bottom-2 w-full text-center text-gray-600 dark:text-gray-400 ms-2 text-sm">
+        <p>Desenvolvido por <a href="https://github.com/ThiagoDOM" target="_blank">Thiago Moreira</a></p>
+    </div>
 </template>
