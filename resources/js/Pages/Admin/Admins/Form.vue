@@ -26,6 +26,7 @@ const options = {
 const form = useForm({
     name: usePage().props?.admin.name ?? '',
     email: usePage().props?.admin.email ?? '',
+    telefone: usePage().props?.admin.telefone ?? '',
     password: '',
     password_confirmation: '',
 });
@@ -35,7 +36,7 @@ const updateAdmin = () => {
         preserveScroll: true,
         onSuccess: () => resetForm(),
         onError: () => {
-            $toast.error("Oops, an error occurred!", options)
+            $toast.error("Ops! Ocorreu um erro!", options)
         },
     });
 };
@@ -45,16 +46,16 @@ const createAdmin = () => {
         preserveScroll: true,
         onSuccess: () => resetForm(true),
         onError: () => {
-            $toast.error("Oops, an error occurred!", options)
+            $toast.error("Ops! Ocorreu um erro!", options)
         },
     });
 };
 
 const resetForm = (created = false) => {
     if (created)
-        $toast.success("Admin created with success!", options);
+        $toast.success("Admin criado com sucesso!", options);
     else
-        $toast.success("Admin updated with success!", options);
+        $toast.success("Admin atualizado com sucesso!", options);
 
     form.password = '';
     form.password_confirmation = '';
@@ -64,12 +65,12 @@ const resetForm = (created = false) => {
 </script>
 
 <template>
-    <Head :title="admin.id ? 'Admin Edit' : 'Admin Create'" />
+    <Head :title="admin.id ? 'Editar Admin' : 'Cadastrar Admin'" />
 
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Admin {{ admin.id ? 'Edit' :
-                'Create' }}</h2>
+            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">{{ admin.id ? 'Editar' :
+                'Cadastrar' }} Admin</h2>
         </template>
         <div class="py-6">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -77,7 +78,7 @@ const resetForm = (created = false) => {
                     <div class="p-6 text-gray-900 dark:text-gray-100">
                         <form @submit.prevent="admin.id ? updateAdmin() : createAdmin()" class="mt-6 space-y-6">
                             <div>
-                                <InputLabel for="name" value="Name" />
+                                <InputLabel for="name" value="Nome" />
 
                                 <TextInput id="name" type="text" class="mt-1 block w-full" v-model="form.name" required
                                     autofocus autocomplete="name" />
@@ -95,7 +96,15 @@ const resetForm = (created = false) => {
                             </div>
 
                             <div>
-                                <InputLabel for="password" value="New Password" />
+                                <InputLabel for="telefone" value="Telefone" />
+
+                                <TextInput id="telefone" type="text" class="mt-1 block w-full" v-model="form.telefone" autocomplete="telefone" placeholder="(##) #####-####" mask="(##) #####-####" />
+
+                                <InputError class="mt-2" :message="form.errors.telefone" />
+                            </div>
+
+                            <div>
+                                <InputLabel for="password" value="Senha" />
 
                                 <TextInput id="password" ref="passwordInput" v-model="form.password" type="password"
                                     class="mt-1 block w-full" autocomplete="new-password" />
@@ -104,7 +113,7 @@ const resetForm = (created = false) => {
                             </div>
 
                             <div>
-                                <InputLabel for="password_confirmation" value="Confirm Password" />
+                                <InputLabel for="password_confirmation" value="Confirmação da Senha" />
 
                                 <TextInput id="password_confirmation" v-model="form.password_confirmation" type="password"
                                     class="mt-1 block w-full" autocomplete="new-password" />
@@ -113,12 +122,12 @@ const resetForm = (created = false) => {
                             </div>
 
                             <div class="flex items-center gap-4">
-                                <PrimaryButton :disabled="form.processing">Save</PrimaryButton>
+                                <PrimaryButton :disabled="form.processing">Salvar</PrimaryButton>
 
                                 <Transition enter-active-class="transition ease-in-out" enter-from-class="opacity-0"
                                     leave-active-class="transition ease-in-out" leave-to-class="opacity-0">
                                     <p v-if="form.recentlySuccessful" class="text-sm text-gray-600 dark:text-gray-400">
-                                        Saved.</p>
+                                        Salvo.</p>
                                 </Transition>
                             </div>
                         </form>

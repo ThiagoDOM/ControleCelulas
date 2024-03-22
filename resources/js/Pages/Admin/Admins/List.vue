@@ -25,16 +25,20 @@ const columns = [
         key: 'email',
         name: 'Email'
     },
+    {
+        key: 'telefone',
+        name: 'Telefone'
+    },
 ];
 
 </script>
 
 <template>
-    <Head title="Admins List" />
+    <Head title="Lista de Administradores" />
 
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Admins List</h2>
+            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Lista de Administradores</h2>
         </template>
 
         <div class="py-6">

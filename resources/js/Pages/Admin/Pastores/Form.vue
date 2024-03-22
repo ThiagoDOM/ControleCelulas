@@ -36,7 +36,7 @@ const updateUser = () => {
         preserveScroll: true,
         onSuccess: () => resetForm(),
         onError: () => {
-            $toast.error("Oops, an error occurred!", options)
+            $toast.error("Ops! Ocorreu um erro!", options)
         },
     });
 };
@@ -46,16 +46,16 @@ const createUser = () => {
         preserveScroll: true,
         onSuccess: () => resetForm(true),
         onError: () => {
-            $toast.error("Oops, an error occurred!", options)
+            $toast.error("Ops! Ocorreu um erro!", options)
         },
     });
 };
 
 const resetForm = (created = false) => {
     if (created)
-        $toast.success("User created with success!", options);
+        $toast.success("Pastor criado com sucesso!", options);
     else
-        $toast.success("User updated with success!", options);
+        $toast.success("Pastor atualizado com sucesso!", options);
 
     form.password = '';
     form.password_confirmation = '';
@@ -65,12 +65,12 @@ const resetForm = (created = false) => {
 </script>
 
 <template>
-    <Head :title="user.id ? 'User Edit' : 'User Create'" />
+    <Head :title="user.id ? 'Editar Pastor' : 'Cadastrar Pastor'" />
 
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">User {{ user.id ? 'Edit' :
-                'Create' }}</h2>
+            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">{{ user.id ? 'Editar' :
+                'Cadastrar' }} Pastor</h2>
         </template>
         <div class="py-6">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -78,7 +78,7 @@ const resetForm = (created = false) => {
                     <div class="p-6 text-gray-900 dark:text-gray-100">
                         <form @submit.prevent="user.id ? updateUser() : createUser()" class="mt-6 space-y-6">
                             <div>
-                                <InputLabel for="name" value="Name" />
+                                <InputLabel for="name" value="Nome" />
 
                                 <TextInput id="name" type="text" class="mt-1 block w-full" v-model="form.name" required
                                     autofocus autocomplete="name" />
@@ -103,7 +103,7 @@ const resetForm = (created = false) => {
                             </div>
 
                             <div>
-                                <InputLabel for="password" value="New Password" />
+                                <InputLabel for="password" value="Senha" />
 
                                 <TextInput id="password" ref="passwordInput" v-model="form.password" type="password"
                                     class="mt-1 block w-full" autocomplete="new-password" placeholder="****"/>
@@ -112,7 +112,7 @@ const resetForm = (created = false) => {
                             </div>
 
                             <div>
-                                <InputLabel for="password_confirmation" value="Confirm Password" />
+                                <InputLabel for="password_confirmation" value="Confirmação da Senha" />
 
                                 <TextInput id="password_confirmation" v-model="form.password_confirmation" type="password"
                                     class="mt-1 block w-full" autocomplete="new-password"/>
@@ -121,12 +121,12 @@ const resetForm = (created = false) => {
                             </div>
 
                             <div class="flex items-center gap-4">
-                                <PrimaryButton :disabled="form.processing">Save</PrimaryButton>
+                                <PrimaryButton :disabled="form.processing">Salvar</PrimaryButton>
 
                                 <Transition enter-active-class="transition ease-in-out" enter-from-class="opacity-0"
                                     leave-active-class="transition ease-in-out" leave-to-class="opacity-0">
                                     <p v-if="form.recentlySuccessful" class="text-sm text-gray-600 dark:text-gray-400">
-                                        Saved.</p>
+                                        Salvo.</p>
                                 </Transition>
                             </div>
                         </form>

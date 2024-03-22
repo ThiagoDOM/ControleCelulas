@@ -2,18 +2,18 @@
     <Modal :show="true" @close="closeModal">
         <div class="p-6">
             <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                <font-awesome-icon icon="triangle-exclamation" class="text-red-600" /> Delete
+                <font-awesome-icon icon="triangle-exclamation" class="text-red-600" /> Excluir
             </h2>
 
             <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                Are you sure you want to delete this item? This action cannot be undone.
+                Tem certeza de que deseja excluir este item? Essa ação não pode ser desfeita.
             </p>
 
             <div class="mt-6 flex justify-end">
-                <SecondaryButton @click="closeModal"> Cancel </SecondaryButton>
+                <SecondaryButton @click="closeModal"> Cancelar </SecondaryButton>
                 <DangerButton class="ms-3" :class="{ 'opacity-25': form.processing }" :disabled="form.processing"
                     :html="{ '...': form.processing }" @click="deleteUser(id, url)">
-                    Delete Item
+                    Excluir Item
                 </DangerButton>
             </div>
         </div>
@@ -71,7 +71,7 @@ const errorModal = (status) => {
     else if(status == 401)
         $toast.error("No permission to delete!", options);
     else
-        $toast.error("Oops, an error occurred!", options);
+        $toast.error("Ops! Ocorreu um erro!", options);
 
     console.log('erro!');
     emit('error');

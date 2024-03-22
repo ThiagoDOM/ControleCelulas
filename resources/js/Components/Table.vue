@@ -57,8 +57,7 @@ const itemSelected = ref(null);
         <TextInput id="current_password" ref="currentPasswordInput" v-model="form.name" type="text"
             class="mt-1 md:w-60 w-full" placeholder="Nome" />
         <div class="flex-row-reverse">
-            <button type="submit" class="ml-3 mr-3 mt-3"><font-awesome-icon
-                    :icon="['fas', 'magnifying-glass']" /></button>
+            <button type="submit" class="px-3 py-3"><font-awesome-icon :icon="['fas', 'magnifying-glass']" /></button>
         </div>
         <div class="ml-auto mt-2">
             <Link v-if="route().has(routeBase + '.create')" :href="route(routeBase + '.create')">
@@ -71,11 +70,15 @@ const itemSelected = ref(null);
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
-                    <th v-for="column in columns" :key="column.key" scope="col" class="px-6 py-3 cursor-pointer truncate"
+                    <th v-for="column in columns" :key="column.key" scope="col"
+                        class="px-6 py-3 cursor-pointer truncate"
                         :class="{ 'text-gray-500 dark:text-gray-200': form.order_key == column.key }"
                         @click="changeOrder(column.key)">
                         {{ column.name }}
-                        <span :class="{'invisible': form.order_key != column.key}">{{ form.order ? '↑' : '↓' }}</span>
+                        <span :class="{ 'invisible': form.order_key != column.key }">
+                            <font-awesome-icon v-if="form.order" :icon="['fas', 'arrow-up']" />
+                            <font-awesome-icon v-else :icon="['fas', 'arrow-down']" />
+                        </span>
                     </th>
                     <th scope="col" class="px-6 py-3">Ação</th>
                 </tr>
@@ -89,10 +92,11 @@ const itemSelected = ref(null);
                     <td class="px-6 py-4">
                         <Link v-if="route().has(routeBase + '.edit', item.id)"
                             :href="route(routeBase + '.edit', item.id)">
-                        <SecondaryButton>Edit</SecondaryButton>
+                        <SecondaryButton><font-awesome-icon :icon="['fas', 'pencil']" /></SecondaryButton>
                         </Link>
                         <DangerButton v-if="route().has(routeBase + '.destroy', item.id)" class="ms-0 sm:ms-3"
-                            @click="openDeleteModal(item)">Delete</DangerButton>
+                            @click="openDeleteModal(item)"><font-awesome-icon :icon="['fas', 'trash']" />
+                        </DangerButton>
                     </td>
                 </tr>
             </tbody>

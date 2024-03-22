@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\FuncHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Http\Resources\UserResource;
@@ -23,10 +24,13 @@ class AdminController extends Controller
         if ($request->name)
             $admins->where('name', 'LIKE', "%$request->name%");
 
+        if($request->order_key)
+            $admins->orderBy($request->order_key ?? 'name', $request->order == "true" ? "DESC" : "ASC");
+
         return Inertia::render('Admin/Admins/List', [
             'query' => $request->all(),
             'admins' => UserResource::collection(
-                $admins->latest()->paginate()->withQueryString()
+                $admins->paginate()->withQueryString()
             ),
         ]);
     }
@@ -52,9 +56,10 @@ class AdminController extends Controller
 
         $data['password'] = bcrypt($data['password']);
         $data['role'] = 'admin';
+        $data['telefone'] = FuncHelper::desmascararTelefone($data['telefone']);
         $admin = User::create($data);
 
-        return Redirect::route('admin.admins.edit', $admin->id);
+        return Redirect::route('admin.admins.index');
     }
 
     /**
@@ -95,7 +100,7 @@ class AdminController extends Controller
             unset($data['password']);
         else
             $data['password'] = bcrypt($data['password']);
-
+        $data['telefone'] = FuncHelper::desmascararTelefone($data['telefone']);
         $admin->fill($data);
 
         if ($admin->isDirty('email')) {
@@ -104,7 +109,7 @@ class AdminController extends Controller
 
         $admin->save();
 
-        return Redirect::route('admin.admins.edit', $admin->id);
+        return Redirect::route('admin.admins.index');
     }
 
     /**

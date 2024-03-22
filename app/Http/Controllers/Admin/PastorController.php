@@ -25,12 +25,12 @@ class PastorController extends Controller
             $users->where('name', 'LIKE', "%$request->name%");
 
         if($request->order_key)
-            $users->orderBy($request->order_key, $request->order == "true" ? "DESC" : "ASC");
+            $users->orderBy($request->order_key ?? 'name', $request->order == "true" ? "DESC" : "ASC");
 
         return Inertia::render('Admin/Pastores/List', [
             'query' => $request->all(),
             'users' => UserResource::collection(
-                $users->latest()->paginate()->withQueryString()
+                $users->paginate()->withQueryString()
             ),
         ]);
     }
@@ -59,7 +59,7 @@ class PastorController extends Controller
         $data['telefone'] = FuncHelper::desmascararTelefone($data['telefone']);
         $user = User::create($data);
 
-        return Redirect::route('admin.pastores.edit', $user->id);
+        return Redirect::route('admin.pastores.index');
     }
 
     /**
@@ -111,7 +111,7 @@ class PastorController extends Controller
 
         $user->save();
 
-        return Redirect::route('admin.pastores.edit', $user->id);
+        return Redirect::route('admin.pastores.index');
     }
 
     /**
