@@ -25,6 +25,7 @@
       "APP_NAME": "personalBlog",
       "APP_ENV": "production",
       "APP_URL":"https://controle-celulas.vercel.app",
+      "ASSET_URL":"https://controle-celulas.vercel.app",
       "APP_DEBUG": "true",
       "APP_CONFIG_CACHE": "/tmp/config.php",
       "APP_EVENTS_CACHE": "/tmp/events.php",
