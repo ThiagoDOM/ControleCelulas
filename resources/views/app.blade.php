@@ -24,6 +24,11 @@
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
+</head>
+
+<body class="font-sans antialiased">
+    @inertia
+
     <script>
         var beforeInstallPrompt = null;
 
@@ -41,10 +46,6 @@
             if (beforeInstallPrompt) beforeInstallPrompt.prompt();
         }
     </script>
-</head>
-
-<body class="font-sans antialiased">
-    @inertia
 </body>
 
 </html>
