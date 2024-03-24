@@ -12,7 +12,15 @@ if ($_GET['type'] === 'js') {
     header('Content-Type: application/javascript; charset: UTF-8');
     echo require __DIR__ . '/../public/js/' . basename($_GET['file']);
 }
+if ($_GET['type'] === 'vue') {
+    header('Content-Type: application/javascript; charset: UTF-8');
+    echo require __DIR__ . '/../public/js/' . basename($_GET['file']);
+}
 if ($_GET['type' === 'webmanifest']){
+    header('Content-Type: application/manifest+json; charset: UTF-8');
+    echo require __DIR__ . '/../public/manifest.webmanifest';
+}
+if ($_GET['type' === 'manifest']){
     header('Content-Type: application/manifest+json; charset: UTF-8');
     echo require __DIR__ . '/../public/manifest.webmanifest';
 }
