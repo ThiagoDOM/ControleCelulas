@@ -20,11 +20,14 @@ if ($_GET['type' === 'webmanifest']){
     header('Content-Type: application/manifest+json; charset: UTF-8');
     echo require __DIR__ . '/../public/manifest.webmanifest';
 }
-if ($_GET['type' === 'manifest']){
-    header('Content-Type: application/manifest+json; charset: UTF-8');
-    echo require __DIR__ . '/../public/manifest.webmanifest';
-}
+
 if ($_GET['type'] === 'json') {
     header('Content-Type: application/json; charset: UTF-8');
     echo require __DIR__ . '/../public/' . basename($_GET['file']);
+}
+
+if ($_GET['type'] === 'manifest') {
+    header('Content-Type: application/manifest+json; charset=UTF-8');
+    echo file_get_contents(__DIR__ . '/../public/manifest.json');
+    exit;
 }
