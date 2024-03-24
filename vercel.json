@@ -68,7 +68,7 @@
       }
     ],
     "env": {
-      "APP_NAME": "personalBlog",
+      "APP_NAME": "Controle de Células",
       "APP_ENV": "production",
       "APP_URL":"https://controle-celulas.vercel.app",
       "ASSET_URL":"https://controle-celulas.vercel.app",
