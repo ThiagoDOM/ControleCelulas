@@ -23,7 +23,8 @@ class AppServiceProvider extends ServiceProvider
     {
         // JsonResource::withoutWrapping();
         if (env('APP_ENV') === 'production') {
-            URL::forceSchema('https');
+            // URL::forceSchema('https');
+            $this->app['request']->server->set('HTTPS', true);
         }
     }
 }
