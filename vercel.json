@@ -6,6 +6,14 @@
     },
     "routes": [
       {
+        "src": "/sw.js",
+        "dest": "/public/sw.js"
+      },
+      {
+        "src": "/offline.html",
+        "dest": "/public/offline.html"
+      },
+      {
         "src": "/favicon.ico",
         "dest": "/public/favicon.ico"
       },

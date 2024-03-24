@@ -1,7 +1,18 @@
 <script setup>
 import UserLayout from './UserLayout.vue';
 import AdminLayout from './AdminLayout.vue';
+import { onMounted } from 'vue'
 
+onMounted(() => {
+    if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("/sw.js").then(reg => {
+            console.log("Registration succesful, scope: " + reg.scope);
+        })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+})
 </script>
 <template>
     <AdminLayout v-if="$page.props.auth.user.role == 'admin'">

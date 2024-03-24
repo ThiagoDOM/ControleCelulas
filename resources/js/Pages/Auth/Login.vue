@@ -79,7 +79,7 @@ const siteOnly = ref(false);
                 </PrimaryButton>
             </div>
         </form>
-        <div class="mt-7 text-gray-600 dark:text-gray-400" :class="{ hidden: $beforeInstallPrompt == null || siteOnly }">
+        <div class="mt-7 text-gray-600 dark:text-gray-400" :class="{ hidden: siteOnly }">
             <div class="mb-2">Deseja instalar o site como app?</div>
             <PrimaryButton class="ms-4" id="installBtn" onclick="instalar()"
                 :disabled="$beforeInstallPrompt == null"> instalar app </PrimaryButton>

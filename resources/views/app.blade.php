@@ -28,24 +28,6 @@
 
 <body class="font-sans antialiased">
     @inertia
-
-    <script>
-        var beforeInstallPrompt = null;
-
-        window.addEventListener("beforeinstallprompt", eventHandler, errorHandler);
-
-        function eventHandler(event) {
-            beforeInstallPrompt = event;
-        }
-
-        function errorHandler(event) {
-            console.log("error: " + event);
-        }
-
-        function instalar() {
-            if (beforeInstallPrompt) beforeInstallPrompt.prompt();
-        }
-    </script>
 </body>
 
 </html>

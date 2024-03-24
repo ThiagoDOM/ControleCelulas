@@ -17,7 +17,7 @@ createInertiaApp({
     setup({ el, App, props, plugin }) {
         const VueApp = createApp({ render: () => h(App, props) });
 
-        VueApp.config.globalProperties.$beforeInstallPrompt = beforeInstallPrompt;
+        // VueApp.config.globalProperties.$beforeInstallPrompt = beforeInstallPrompt;
 
         return VueApp
             .component('font-awesome-icon', FontAwesomeIcon)
