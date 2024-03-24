@@ -8,26 +8,31 @@ if ($_GET['type'] === 'css') {
     header("Content-type: text/css; charset: UTF-8");
     echo require __DIR__ . '/../public/css/' . basename($_GET['file']);
 }
-if ($_GET['type'] === 'js') {
+else if ($_GET['type'] === 'js') {
     header('Content-Type: application/javascript; charset: UTF-8');
     echo require __DIR__ . '/../public/js/' . basename($_GET['file']);
 }
-if ($_GET['type'] === 'vue') {
-    header('Content-Type: application/javascript; charset: UTF-8');
-    echo require __DIR__ . '/../public/js/' . basename($_GET['file']);
-}
-if ($_GET['type' === 'webmanifest']){
-    header('Content-Type: application/manifest+json; charset: UTF-8');
-    echo require __DIR__ . '/../public/manifest.webmanifest';
-}
-
-if ($_GET['type'] === 'json') {
-    header('Content-Type: application/json; charset: UTF-8');
+else {
+    $mime = mime_content_type('/../public/' . basename($_GET['file']));
+    header("Content-Type: $mime; charset: UTF-8");
     echo require __DIR__ . '/../public/' . basename($_GET['file']);
 }
+// if ($_GET['type'] === 'vue') {
+//     header('Content-Type: application/javascript; charset: UTF-8');
+//     echo require __DIR__ . '/../public/js/' . basename($_GET['file']);
+// }
+// if ($_GET['type' === 'webmanifest']){
+//     header('Content-Type: application/manifest+json; charset: UTF-8');
+//     echo require __DIR__ . '/../public/manifest.webmanifest';
+// }
 
-if ($_GET['type'] === 'manifest') {
-    header('Content-Type: application/manifest+json; charset=UTF-8');
-    echo file_get_contents(__DIR__ . '/../public/manifest.json');
-    exit;
-}
+// if ($_GET['type'] === 'json') {
+//     header('Content-Type: application/json; charset: UTF-8');
+//     echo require __DIR__ . '/../public/' . basename($_GET['file']);
+// }
+
+// if ($_GET['type'] === 'manifest') {
+//     header('Content-Type: application/manifest+json; charset=UTF-8');
+//     echo file_get_contents(__DIR__ . '/../public/manifest.json');
+//     exit;
+// }
