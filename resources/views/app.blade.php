@@ -31,7 +31,6 @@
 
         function eventHandler(event) {
             beforeInstallPrompt = event;
-            document.getElementById("installBtn").removeAttribute("disabled");
         }
 
         function errorHandler(event) {
@@ -46,8 +45,6 @@
 
 <body class="font-sans antialiased">
     @inertia
-
-    <button id="installBtn" onclick="instalar()" disabled > Instalar PWA </button>
 </body>
 
 </html>
