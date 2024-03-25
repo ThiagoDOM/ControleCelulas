@@ -79,10 +79,10 @@ const siteOnly = ref(false);
                 </PrimaryButton>
             </div>
         </form>
-        <div class="mt-7 text-gray-600 dark:text-gray-400" :class="{ hidden: siteOnly }">
+        <div class="mt-7 text-gray-600 dark:text-gray-400" :class="{ hidden: siteOnly || true }">
             <div class="mb-2">Deseja instalar o site como app?</div>
-            <PrimaryButton class="ms-4" id="installBtn" onclick="instalar()"
-                :disabled="$beforeInstallPrompt == null"> instalar app </PrimaryButton>
+            <PrimaryButton class="ms-4" id="installBtn" @click="$emit('instalar')"
+                > instalar app </PrimaryButton>
             <span @click="siteOnly=true" class="mx-3 underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">Não, desejo continuar no site.</span>
         </div>
     </GuestLayout>

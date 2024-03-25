@@ -3,6 +3,24 @@ import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import { Link } from '@inertiajs/vue3';
 import { onMounted } from 'vue'
 
+var beforeInstallPrompt = null;
+
+window.addEventListener("beforeinstallprompt", eventHandler, errorHandler);
+
+function eventHandler(event) {
+  beforeInstallPrompt = event;
+  document.getElementById("installBtn").removeAttribute("disabled");
+}
+
+function errorHandler(event) {
+  console.log("error: " + event);
+}
+
+const instalar = () => {
+    console.log('click')
+  if (beforeInstallPrompt) beforeInstallPrompt.prompt();
+}
+
 onMounted(() => {
     if ("serviceWorker" in navigator) {
         navigator.serviceWorker.register("/sw.js").then(reg => {
@@ -27,7 +45,7 @@ onMounted(() => {
 
         <div
             class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
-            <slot />
+            <slot @instalar="instalar()" />
         </div>
     </div>
 </template>
