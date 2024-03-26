@@ -24,8 +24,8 @@ class AdminController extends Controller
         if ($request->name)
             $admins->where('name', 'LIKE', "%$request->name%");
 
-        if($request->order_key)
-            $admins->orderBy($request->order_key ?? 'name', $request->order == "true" ? "DESC" : "ASC");
+
+        $admins->orderBy($request->order_key ?? 'name', $request->order == "true" ? "DESC" : "ASC");
 
         return Inertia::render('Admin/Admins/List', [
             'query' => $request->all(),

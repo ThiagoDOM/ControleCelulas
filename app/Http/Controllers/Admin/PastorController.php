@@ -24,8 +24,8 @@ class PastorController extends Controller
         if ($request->name)
             $users->where('name', 'LIKE', "%$request->name%");
 
-        if($request->order_key)
-            $users->orderBy($request->order_key ?? 'name', $request->order == "true" ? "DESC" : "ASC");
+
+        $users->orderBy($request->order_key ?? 'name', $request->order == "true" ? "DESC" : "ASC");
 
         return Inertia::render('Admin/Pastores/List', [
             'query' => $request->all(),
