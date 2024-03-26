@@ -20,6 +20,9 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
+    return redirect()->route('admin/dashboard');
+});
+Route::get('/dev', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),

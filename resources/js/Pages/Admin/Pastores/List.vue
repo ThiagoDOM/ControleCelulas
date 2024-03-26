@@ -34,7 +34,7 @@ const columns = [
 </script>
 
 <template>
-    <Head title="Users List" />
+    <Head title="Lista de Pastores" />
 
     <AuthenticatedLayout>
         <template #header>
