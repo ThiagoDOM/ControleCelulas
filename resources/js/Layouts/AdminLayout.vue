@@ -41,6 +41,12 @@ const showingNavigationDropdown = ref(false);
                                 <NavLink :href="route('admin.pastores.index')" :active="route().current('admin.pastores.index')">
                                     Pastores
                                 </NavLink>
+                                <NavLink :href="route('admin.discipuladores.index')" :active="route().current('admin.discipuladores.index')">
+                                    Discipuladores
+                                </NavLink>
+                                <NavLink :href="route('admin.lideres.index')" :active="route().current('admin.lideres.index')">
+                                    Lideres
+                                </NavLink>
                             </div>
                         </div>
 
@@ -129,6 +135,12 @@ const showingNavigationDropdown = ref(false);
                         </ResponsiveNavLink>
                         <ResponsiveNavLink :href="route('admin.pastores.index')" :active="route().current('admin.pastores.index')">
                             Pastores
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('admin.discipuladores.index')" :active="route().current('admin.discipuladores.index')">
+                            Discipuladores
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('admin.lideres.index')" :active="route().current('admin.lideres.index')">
+                            Lideres
                         </ResponsiveNavLink>
                     </div>
 

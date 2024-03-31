@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\PastorController;
+use App\Http\Controllers\Admin\DiscipuladorController;
+use App\Http\Controllers\Admin\LiderController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -20,7 +22,7 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return redirect()->route('admin/dashboard');
+    return redirect()->route('admin.dashboard');
 });
 Route::get('/dev', function () {
     return Inertia::render('Welcome', [
@@ -48,6 +50,8 @@ Route::middleware(['auth','admin'])->name('admin.')->prefix('admin')->group(func
 
     Route::resource('admins', AdminController::class);
     Route::resource('pastores', PastorController::class);
+    Route::resource('discipuladores', DiscipuladorController::class);
+    Route::resource('lideres', LiderController::class);
 });
 //Auth and Profile Routes
 Route::middleware('auth')->group(function () {
