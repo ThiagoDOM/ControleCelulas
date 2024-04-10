@@ -1,9 +1,11 @@
 {
     "version": 2,
     "regions": ["iad1"],
-    "functions": {
-      "api/index.php": { "runtime": "vercel-php@0.6.1" }
-    },
+    "builds": [
+        { "src": "/public/index.php", "use": "vercel-php@0.7.0" },
+        { "src": "/storage/app/public/**", "use": "@vercel/static" },
+        { "src": "/public/**", "use": "@vercel/static" }
+    ],
     "routes": [
       {
         "src": "/sw.js",
@@ -86,7 +88,6 @@
       "APP_PACKAGES_CACHE": "/tmp/packages.php",
       "APP_ROUTES_CACHE": "/tmp/routes.php",
       "APP_SERVICES_CACHE": "/tmp/services.php",
-      "VIEW_COMPILED_PATH": "/tmp",
       "CACHE_DRIVER": "array",
       "LOG_CHANNEL": "stderr",
       "SESSION_DRIVER": "cookie",
