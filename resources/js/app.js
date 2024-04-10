@@ -9,7 +9,7 @@ import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import './icons';
 
-const appName = import.meta.env.VITE_APP_NAME || 'Controle de Células';
+const appName = 'Controle de Células';
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
