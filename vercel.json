@@ -7,49 +7,31 @@
     ],
     "routes": [
       {
-        "src": "/sw.js",
-        "dest": "/public/sw.js"
+        "src": "/(.js)",
+        "dest": "/public/$1"
       },
       {
-        "src": "/offline.html",
+        "src": "/(.html)",
         "dest": "/public/offline.html"
       },
       {
-        "src": "/favicon.ico",
+        "src": "/(.ico)",
         "dest": "/public/favicon.ico"
       },
       {
-        "src": "/android-chrome-192x192.png",
-        "dest": "/public/android-chrome-192x192.png"
+        "src": "/(.png)",
+        "dest": "/public/$1"
       },
       {
-        "src": "/android-chrome-512x512.png",
-        "dest": "/public/android-chrome-512x512.png"
-      },
-      {
-        "src": "/apple-touch-icon.png",
-        "dest": "/public/apple-touch-icon.png"
-      },
-      {
-        "src": "/browserconfig.xml",
+        "src": "/(.xml)",
         "dest": "/public/browserconfig.xml"
       },
-      {
-        "src": "/favicon-16x16.png",
-        "dest": "/public/favicon-16x16.png"
-      },
-      {
-        "src": "/favicon-32x32.png",
-        "dest": "/public/favicon-32x32.png"
-      },
+
       {
         "src": "/manifest.webmanifest",
         "dest": "/public/manifest.webmanifest"
       },
-      {
-        "src": "/mstile-150x150.png",
-        "dest": "/public/mstile-150x150.png"
-      },
+
       {
         "src": "/robots.txt",
         "dest": "/public/robots.txt"
