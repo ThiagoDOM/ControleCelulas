@@ -2,8 +2,7 @@
     "version": 2,
     "regions": ["iad1"],
     "builds": [
-        { "src": "/public/index.php", "use": "vercel-php@0.7.0" },
-        { "src": "/storage/app/public/**", "use": "@vercel/static" },
+        { "src": "/public/index.php", "use": "vercel-php@0.6.1" },
         { "src": "/public/**", "use": "@vercel/static" }
     ],
     "routes": [
@@ -74,7 +73,7 @@
       },
       {
         "src": "/(.*)",
-        "dest": "/api/index.php"
+        "dest": "/public/index.php"
       }
     ],
     "env": {
