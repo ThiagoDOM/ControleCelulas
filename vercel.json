@@ -60,6 +60,11 @@
       },
 
       {
+        "src": "/storage/(.*)",
+        "dest": "/storage/app/public/$1"
+      },
+
+      {
         "src": "/build/(.*)",
         "dest": "/public/build/$1"
       },
