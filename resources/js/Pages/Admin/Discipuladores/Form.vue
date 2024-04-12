@@ -13,7 +13,7 @@ import Multiselect from "vue-multiselect";
 import "vue-multiselect/dist/vue-multiselect.css";
 
 
-defineProps({
+const data = defineProps({
     user: {
         type: Object,
     },
@@ -34,13 +34,14 @@ const form = useForm({
     name: usePage().props?.user.name ?? '',
     email: usePage().props?.user.email ?? '',
     telefone: usePage().props?.user.telefone ?? '',
-    responsavel: usePage().props?.user.responsavel ?? '',
+    responsavel_id: usePage().props?.user.responsavel_id ?? '',
     password: '',
     password_confirmation: '',
 });
 
+const multiselect = ref(data.responsaveis.find((objeto) => objeto.id === form.responsavel_id));
+
 const updateUser = () => {
-    form.responsavel = form.responsavel.id;
     form.patch(route('admin.discipuladores.update', usePage().props.user.id), {
         preserveScroll: true,
         onSuccess: () => resetForm(),
@@ -51,7 +52,6 @@ const updateUser = () => {
 };
 
 const createUser = () => {
-    form.responsavel = form.responsavel.id;
     form.post(route('admin.discipuladores.store'), {
         preserveScroll: true,
         onSuccess: () => resetForm(true),
@@ -116,13 +116,14 @@ const resetForm = (created = false) => {
                             <div>
                                 <InputLabel for="responsavel" value="Pastor" />
 
-                                <Multiselect name="responsavel" v-model="form.responsavel" :options="responsaveis"
+                                <Multiselect name="responsavel" v-model="multiselect" :options="responsaveis"
+                                @select="form.responsavel_id = multiselect.id"
                                     track-by="name" label="name" select-label="Pressione Enter para selecionar"
-                                    placeholder="Procurar pastor" deselect-label="Pressione Enter para remover"
+                                    placeholder="Selecionar Pastor" deselect-label="Pressione Enter para remover"
                                     selected-label="Selecionado" :taggable="true" :multiple="false"
                                     :show-labels="false">
                                 </Multiselect>
-                                <InputError :message="form.errors.responsavel" class="mt-2" />
+                                <InputError :message="form.errors.responsavel_id" class="mt-2" />
                             </div>
                             <div>
                                 <InputLabel for="password" value="Senha" />

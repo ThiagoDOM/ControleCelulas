@@ -29,6 +29,10 @@ const columns = [
         key: 'telefone',
         name: 'Telefone'
     },
+    {
+        key: 'responsavel',
+        name: 'Discipulador'
+    }
 ];
 
 </script>

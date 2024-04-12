@@ -8,7 +8,7 @@ use Illuminate\Validation\Rule;
 use App\Models\User;
 
 
-class DiscipuladorRequest extends FormRequest
+class LiderRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -53,7 +53,7 @@ class DiscipuladorRequest extends FormRequest
 public function attributes(): array
 {
     return [
-        'responsavel_id' => 'pastor',
+        'responsavel_id' => 'discipulador',
     ];
 }
 }

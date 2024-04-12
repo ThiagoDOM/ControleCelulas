@@ -9,10 +9,16 @@ import { Link, useForm, usePage } from '@inertiajs/vue3';
 import { ref } from 'vue';
 import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
+import Multiselect from "vue-multiselect";
+import "vue-multiselect/dist/vue-multiselect.css";
 
-defineProps({
+const data = defineProps({
     user: {
         type: Object,
+    },
+    responsaveis: {
+        type: Array,
+        default: []
     }
 });
 
@@ -27,9 +33,12 @@ const form = useForm({
     name: usePage().props?.user.name ?? '',
     email: usePage().props?.user.email ?? '',
     telefone: usePage().props?.user.telefone ?? '',
+    responsavel_id: usePage().props?.user.responsavel_id ?? '',
     password: '',
     password_confirmation: '',
 });
+
+const multiselect = ref(data.responsaveis.find((objeto) => objeto.id === form.responsavel_id));
 
 const updateUser = () => {
     form.patch(route('admin.lideres.update', usePage().props.user.id), {
@@ -100,6 +109,19 @@ const resetForm = (created = false) => {
                                 <TextInput id="telefone" type="text" class="mt-1 block w-full" v-model="form.telefone" autocomplete="telefone" placeholder="(##) #####-####" mask="(##) #####-####" />
 
                                 <InputError class="mt-2" :message="form.errors.telefone" />
+                            </div>
+
+                            <div>
+                                <InputLabel for="responsavel" value="Discipulador" />
+
+                                <Multiselect name="responsavel" v-model="multiselect" :options="responsaveis"
+                                @select="form.responsavel_id = multiselect.id"
+                                    track-by="name" label="name" select-label="Pressione Enter para selecionar"
+                                    placeholder="Selecionar Discipulador" deselect-label="Pressione Enter para remover"
+                                    selected-label="Selecionado" :taggable="true" :multiple="false"
+                                    :show-labels="false">
+                                </Multiselect>
+                                <InputError :message="form.errors.responsavel_id" class="mt-2" />
                             </div>
 
                             <div>

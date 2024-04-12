@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Helpers\FuncHelper;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UserRequest;
+use App\Http\Requests\LiderRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -41,16 +41,18 @@ class LiderController extends Controller
     public function create()
     {
         $user = new User();
+        $discipuladores = User::discipuladores()->get();
 
         return Inertia::render('Admin/Lideres/Form', [
-            'user' => $user
+            'user' => $user,
+            'responsaveis' => $discipuladores
         ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(UserRequest $request)
+    public function store(LiderRequest $request)
     {
         $data = $request->all();
 
@@ -76,19 +78,21 @@ class LiderController extends Controller
     public function edit(string $id)
     {
         $user = User::findOrFail($id);
+        $discipuladores = User::discipuladores()->get();
 
         if (!$user->is('lider'))
             abort(404);
 
         return Inertia::render('Admin/Lideres/Form', [
-            'user' => $user
+            'user' => $user,
+            'responsaveis' => $discipuladores
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UserRequest $request, string $id)
+    public function update(LiderRequest $request, string $id)
     {
         $user = User::findOrFail($id);
 

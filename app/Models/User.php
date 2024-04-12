@@ -24,7 +24,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'telefone',
         'password',
         'role',
-        'responsavel'
+        'responsavel_id'
     ];
 
     /**
@@ -52,7 +52,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function responsavel()
     {
-        return $this->belongsTo(User::class, 'responsavel');
+        return $this->belongsTo(User::class, 'responsavel_id');
     }
 
     /**

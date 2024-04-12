@@ -21,7 +21,7 @@ class UserResource extends JsonResource
             'name' => $this->name,
             'email' => $this->email,
             'telefone' => $this->telefone ? FuncHelper::mascaraTelefone($this->telefone) : '-',
-            'responsavel' => $this->responsavel_id ? $this->responsavel->name : '-'
+            'responsavel' => $this->responsavel ? $this->responsavel->name : '-'
         ];
     }
 }
