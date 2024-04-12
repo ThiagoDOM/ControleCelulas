@@ -15,7 +15,7 @@ class LiderRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return auth()->user()->is('admin') || auth()->user()->is('pastor');
+        return auth()->user()->is('admin') || auth()->user()->is('pastor') || auth()->user()->is('discipulador');
     }
 
     /**

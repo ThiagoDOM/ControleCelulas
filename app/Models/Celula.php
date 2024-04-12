@@ -15,6 +15,11 @@ class Celula extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'name'
+        'name',
+        'lider_id'
     ];
+
+    public function lider() {
+        return $this->belongsTo(User::class, 'lider_id');
+    }
 }

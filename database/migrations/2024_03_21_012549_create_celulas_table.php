@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('celulas', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->unsignedBigInteger('lider_id');
             $table->timestamps();
         });
     }

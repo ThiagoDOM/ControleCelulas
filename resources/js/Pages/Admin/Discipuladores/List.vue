@@ -31,7 +31,8 @@ const columns = [
     },
     {
         key: 'responsavel',
-        name: 'Pastor'
+        name: 'Pastor',
+        not_sortable: true
     },
 ];
 

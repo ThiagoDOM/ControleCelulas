@@ -45,7 +45,10 @@ const showingNavigationDropdown = ref(false);
                                     Discipuladores
                                 </NavLink>
                                 <NavLink :href="route('admin.lideres.index')" :active="route().current('admin.lideres.index')">
-                                    Lideres
+                                    Líderes
+                                </NavLink>
+                                <NavLink :href="route('admin.celulas.index')" :active="route().current('admin.celulas.index')">
+                                    Células
                                 </NavLink>
                             </div>
                         </div>
@@ -140,7 +143,10 @@ const showingNavigationDropdown = ref(false);
                             Discipuladores
                         </ResponsiveNavLink>
                         <ResponsiveNavLink :href="route('admin.lideres.index')" :active="route().current('admin.lideres.index')">
-                            Lideres
+                            Líderes
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('admin.celulas.index')" :active="route().current('admin.celulas.index')">
+                            Células
                         </ResponsiveNavLink>
                     </div>
 

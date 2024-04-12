@@ -71,9 +71,9 @@ const itemSelected = ref(null);
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                     <th v-for="column in columns" :key="column.key" scope="col"
-                        class="px-6 py-3 cursor-pointer truncate"
-                        :class="{ 'text-gray-500 dark:text-gray-200': form.order_key == column.key }"
-                        @click="changeOrder(column.key)">
+                        class="px-6 py-3 truncate"
+                        :class="{ 'text-gray-500 dark:text-gray-200': form.order_key == column.key, 'cursor-pointer': !column.not_sortable }"
+                        @click="!column.not_sortable ? changeOrder(column.key) : null">
                         {{ column.name }}
                         <span :class="{ 'invisible': form.order_key != column.key }">
                             <font-awesome-icon v-if="form.order" :icon="['fas', 'arrow-up']" />
