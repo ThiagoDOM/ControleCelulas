@@ -7,6 +7,7 @@ import { faArrowUp } from '@fortawesome/free-solid-svg-icons'
 import { faArrowDown } from '@fortawesome/free-solid-svg-icons'
 import { faAnglesRight } from '@fortawesome/free-solid-svg-icons'
 import { faAnglesLeft } from '@fortawesome/free-solid-svg-icons'
+import { faFileInvoice } from '@fortawesome/free-solid-svg-icons'
 
 
 library.add(
@@ -17,5 +18,6 @@ library.add(
     faArrowUp,
     faArrowDown,
     faAnglesRight,
-    faAnglesLeft
+    faAnglesLeft,
+    faFileInvoice
     )

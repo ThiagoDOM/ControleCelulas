@@ -11,6 +11,13 @@ import TextInput from '@/Components/TextInput.vue';
 import Table from '@/Components/Table.vue';
 import { useForm, usePage } from '@inertiajs/vue3';
 
+import { onMounted } from "vue";
+import { initFlowbite } from "flowbite";
+
+onMounted(() => {
+    initFlowbite();
+});
+
 const props = defineProps({
     items: {
         type: Object,
@@ -70,8 +77,7 @@ const itemSelected = ref(null);
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
-                    <th v-for="column in columns" :key="column.key" scope="col"
-                        class="px-6 py-3 truncate"
+                    <th v-for="column in columns" :key="column.key" scope="col" class="px-6 py-3 truncate"
                         :class="{ 'text-gray-500 dark:text-gray-200': form.order_key == column.key, 'cursor-pointer': !column.not_sortable }"
                         @click="!column.not_sortable ? changeOrder(column.key) : null">
                         {{ column.name }}
@@ -90,13 +96,22 @@ const itemSelected = ref(null);
                         :class="{ 'font-medium text-gray-900 whitespace-nowrap dark:text-white': column.key == 'id' }">
                         {{ item[column.key] }}</td>
                     <td class="px-6 py-4 inline-flex">
-                        <Link v-if="route().has(routeBase + '.edit', item.id)"
+                        <slot :item="item" />
+                        <Link v-if="route().has(routeBase + '.edit', item.id)" :data-tooltip-target="'tooltip-edit-'+item.id"
                             :href="route(routeBase + '.edit', item.id)" class="mr-3 sm:mr-0">
                         <SecondaryButton><font-awesome-icon :icon="['fas', 'pencil']" /></SecondaryButton>
                         </Link>
-                        <DangerButton v-if="route().has(routeBase + '.destroy', item.id)" class="ms-0 sm:ms-3"
+                        <DangerButton v-if="route().has(routeBase + '.destroy', item.id)" class="ms-0 sm:ms-3" :data-tooltip-target="'tooltip-delete-'+item.id"
                             @click="openDeleteModal(item)"><font-awesome-icon :icon="['fas', 'trash']" />
                         </DangerButton>
+                        <div :id="'tooltip-edit-'+item.id" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                            Editar
+                            <div class="tooltip-arrow" data-popper-arrow></div>
+                        </div>
+                        <div :id="'tooltip-delete-'+item.id" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                            Excluir
+                            <div class="tooltip-arrow" data-popper-arrow></div>
+                        </div>
                     </td>
                 </tr>
             </tbody>

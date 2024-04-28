@@ -54,6 +54,7 @@ Route::middleware(['auth','admin'])->name('admin.')->prefix('admin')->group(func
     Route::resource('discipuladores', DiscipuladorController::class);
     Route::resource('lideres', LiderController::class);
     Route::resource('celulas', CelulaController::class);
+    Route::resource('celulas/{celula}/relatorios', CelulaController::class);
 });
 //Auth and Profile Routes
 Route::middleware('auth')->group(function () {
