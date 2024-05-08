@@ -30,9 +30,13 @@ import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 // import 'vue-toast-notification/dist/theme-default.css';
 
-defineProps({
+const props = defineProps({
     id: {
         type: Number
+    },
+    additionalParameter: {
+        type: Number,
+        required: false
     },
     url: {
         type: String
@@ -48,13 +52,24 @@ const options = {
 };
 
 const deleteUser = (id, url) => {
-    axios.delete(route(url, id))
+    if(props.additionalParameter){
+        axios.delete(route(url, [props.additionalParameter, id]))
         .then(() => {
             successModal();
         })
         .catch((err) => {
             errorModal(err?.response.status);
         });
+    } else {
+
+        axios.delete(route(url, id))
+        .then(() => {
+            successModal();
+        })
+        .catch((err) => {
+            errorModal(err?.response.status);
+        });
+    }
 };
 const closeModal = () => {
     emit('close');

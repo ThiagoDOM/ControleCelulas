@@ -1,0 +1,112 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use App\Http\Requests\RelatorioRequest;
+use App\Http\Resources\RelatorioResource;
+use App\Models\Celula;
+use App\Models\Relatorio;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Inertia\Inertia;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
+
+class RelatorioController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index($id, Request $request)
+    {
+        $celula = Celula::findOrFail($id);
+        $relatorios = Relatorio::query();
+
+        $relatorios->where('celula_id', $celula->id);
+
+        if ($request->name)
+            $relatorios->where('name', 'LIKE', "%$request->name%");
+
+
+        $relatorios->orderBy($request->order_key ?? 'id', $request->order == "true" ? "DESC" : "ASC");
+
+        return Inertia::render('Admin/Relatorios/List', [
+            'query' => $request->all(),
+            'celula' => $celula,
+            'relatorios' => RelatorioResource::collection(
+                $relatorios->paginate()->withQueryString()
+            ),
+        ]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create($id)
+    {
+        $celula = Celula::findOrFail($id);
+
+        $relatorio = new Relatorio();
+
+        return Inertia::render('Admin/Relatorios/Form', [
+            'celula' => $celula,
+            'relatorio' => $relatorio
+        ]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store($id, RelatorioRequest $request)
+    {
+        $celula = Celula::findOrFail($id);
+        $data = $request->all();
+        $data['celula_id'] = $id;
+
+        $celula = Relatorio::create($data);
+
+        return Redirect::route('admin.relatorios.index', $id);
+    }
+
+    public function edit($id, $relatorio)
+    {
+        $celula = Celula::findOrFail($id);
+        $relatorio = Relatorio::findOrFail($relatorio);
+
+
+        return Inertia::render('Admin/Relatorios/Form', [
+            'celula' => $celula,
+            'relatorio' => $relatorio
+        ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update($id, RelatorioRequest $request, string $relatorio)
+    {
+        $celula = Celula::findOrFail($id);
+        $relatorio = Relatorio::findOrFail($relatorio);
+
+        $data = $request->all();
+        $data['celula_id'] = $id;
+
+        $celula->fill($data);
+
+        $celula->save();
+
+        return Redirect::route('admin.relatorios.index', $id);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy($id, Request $request, string $relatorio)
+    {
+        $celula = Celula::findOrFail($id);
+        $relatorio = Relatorio::findOrFail($relatorio);
+
+        return $relatorio->delete();
+    }
+}

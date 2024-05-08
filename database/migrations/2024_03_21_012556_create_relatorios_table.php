@@ -20,6 +20,7 @@ return new class extends Migration
             $table->tinyInteger('batizados');
             $table->tinyInteger('frequentadores');
             $table->tinyInteger('visitantes');
+            $table->decimal('vl_oferta')->default(0);
             $table->timestamps();
         });
     }

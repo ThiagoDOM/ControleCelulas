@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\PastorController;
 use App\Http\Controllers\Admin\DiscipuladorController;
 use App\Http\Controllers\Admin\LiderController;
 use App\Http\Controllers\Admin\CelulaController;
+use App\Http\Controllers\Admin\RelatorioController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -54,7 +55,7 @@ Route::middleware(['auth','admin'])->name('admin.')->prefix('admin')->group(func
     Route::resource('discipuladores', DiscipuladorController::class);
     Route::resource('lideres', LiderController::class);
     Route::resource('celulas', CelulaController::class);
-    Route::resource('celulas/{celula}/relatorios', CelulaController::class);
+    Route::resource('celulas/{celula}/relatorios', RelatorioController::class);
 });
 //Auth and Profile Routes
 Route::middleware('auth')->group(function () {

@@ -14,6 +14,10 @@ return new class extends Migration
         Schema::create('celulas', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('numero')->nullable();
+            $table->string('dia')->nullable();
+            $table->string('hora')->nullable();
+            $table->string('endereco')->nullable();
             $table->unsignedBigInteger('lider_id');
             $table->timestamps();
         });

@@ -19,11 +19,12 @@ class Relatorio extends Model
         'membros_presentes',
         'batizados',
         'frequentadores',
-        'visitantes'
+        'visitantes',
+        'vl_oferta'
     ];
 
     public function celula()
     {
-        return $this->belongsTo(Celular::class);
+        return $this->belongsTo(Celula::class);
     }
 }

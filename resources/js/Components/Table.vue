@@ -30,11 +30,24 @@ const props = defineProps({
     },
     routeBase: {
         type: String
+    },
+    additionalRoute: {
+        type: String,
+        required: false
+    },
+    additionalParameter: {
+        type: String,
+        required: false
     }
 });
 
 const openDeleteModal = (item) => {
-    itemSelected.value = item.id;
+    if(props.additionalParameter) {
+        itemSelected.value = item.id;
+        itemSelectedAdditional.value = item[props.additionalParameter];
+    } else {
+        itemSelected.value = item.id;
+    }
     isOpen.value = true;
 }
 
@@ -56,18 +69,19 @@ const changeOrder = (key) => {
 
 const isOpen = ref(false);
 const itemSelected = ref(null);
+const itemSelectedAdditional = ref(null);
 
 </script>
 
 <template>
-    <form class="flex" @submit.prevent="form.get(route(routeBase + '.index'))">
+    <form class="flex" @submit.prevent="form.get(route(routeBase + '.index', additionalRoute))">
         <TextInput id="current_password" ref="currentPasswordInput" v-model="form.name" type="text"
             class="mt-1 md:w-60 w-full" placeholder="Nome" />
         <div class="flex-row-reverse">
             <button type="submit" class="px-3 py-3"><font-awesome-icon :icon="['fas', 'magnifying-glass']" /></button>
         </div>
         <div class="ml-auto mt-2">
-            <Link v-if="route().has(routeBase + '.create')" :href="route(routeBase + '.create')">
+            <Link v-if="route().has(routeBase + '.create')" :href="route(routeBase + '.create', additionalRoute)">
             <PrimaryButton>Cadastrar</PrimaryButton>
             </Link>
         </div>
@@ -89,7 +103,12 @@ const itemSelected = ref(null);
                     <th scope="col" class="px-6 py-3">Ação</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody v-if="items.data.length == 0">
+                <tr>
+                    <td colspan="99" class="px-6 py-4">Nenhum item encontrado. </td>
+                </tr>
+            </tbody>
+            <tbody v-else>
                 <tr v-for="item in items.data" :key="item.id"
                     class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                     <td v-for="column in columns" :key="column.key" class="px-6 py-4"
@@ -97,11 +116,11 @@ const itemSelected = ref(null);
                         {{ item[column.key] }}</td>
                     <td class="px-6 py-4 inline-flex">
                         <slot :item="item" />
-                        <Link v-if="route().has(routeBase + '.edit', item.id)" :data-tooltip-target="'tooltip-edit-'+item.id"
-                            :href="route(routeBase + '.edit', item.id)" class="mr-3 sm:mr-0">
+                        <Link v-if="route().has(routeBase + '.edit', (additionalRoute ? [additionalRoute, item.id] : item.id))" :data-tooltip-target="'tooltip-edit-'+item.id"
+                            :href="route(routeBase + '.edit', (additionalRoute ? [additionalRoute, item.id] : item.id))" class="mr-3 sm:mr-0">
                         <SecondaryButton><font-awesome-icon :icon="['fas', 'pencil']" /></SecondaryButton>
                         </Link>
-                        <DangerButton v-if="route().has(routeBase + '.destroy', item.id)" class="ms-0 sm:ms-3" :data-tooltip-target="'tooltip-delete-'+item.id"
+                        <DangerButton v-if="route().has(routeBase + '.destroy', (additionalRoute ? [additionalRoute, item.id] : item.id))" class="ms-0 sm:ms-3" :data-tooltip-target="'tooltip-delete-'+item.id"
                             @click="openDeleteModal(item)"><font-awesome-icon :icon="['fas', 'trash']" />
                         </DangerButton>
                         <div :id="'tooltip-edit-'+item.id" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
@@ -119,6 +138,6 @@ const itemSelected = ref(null);
     </div>
     <Pagination :pagination="items.meta" />
 
-    <ModalDelete v-if="isOpen" @success="success()" @close="isOpen = false" :id="itemSelected"
+    <ModalDelete v-if="isOpen" @success="success()" @close="isOpen = false" :id="itemSelected" :additionalParameter="itemSelectedAdditional"
         :url="routeBase + '.destroy'" />
 </template>
