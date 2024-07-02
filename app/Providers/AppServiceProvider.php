@@ -24,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
         // JsonResource::withoutWrapping();
-        if (env('APP_ENV') === 'production') {
+        if (env('APP_ENV') === 'production' || env('APP_URL') == 'https://celulas.thiagodom.dev.br') {
             // URL::forceSchema('https');
             $this->app['request']->server->set('HTTPS', true);
         }
