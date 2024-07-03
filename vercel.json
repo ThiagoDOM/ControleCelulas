@@ -100,6 +100,6 @@
       "DB_PORT": "5432",
       "DB_DATABASE": "controleCelulas",
       "DB_USERNAME": "controleCelulas_owner",
-      "DB_PASSWORD": "endpoint=ep-twilight-surf-a5j1f6vs;ZI0nE2ySqope"
+      "DB_PASSWORD": "ZI0nE2ySqope"
     }
   }
