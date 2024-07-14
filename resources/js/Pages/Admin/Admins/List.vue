@@ -19,7 +19,7 @@ const columns = [
     },
     {
         key: 'name',
-        name: 'Name'
+        name: 'Nome'
     },
     {
         key: 'email',
