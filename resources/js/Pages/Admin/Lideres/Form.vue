@@ -11,6 +11,8 @@ import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 import Multiselect from "vue-multiselect";
 import "vue-multiselect/dist/vue-multiselect.css";
+import "@/Components/css/multiSelectDarkMode.css";
+import Loading from '@/Components/Loading.vue';
 
 const data = defineProps({
     user: {
@@ -114,13 +116,30 @@ const resetForm = (created = false) => {
                             <div>
                                 <InputLabel for="responsavel" value="Discipulador" />
 
-                                <Multiselect name="responsavel" v-model="multiselect" :options="responsaveis"
-                                @select="form.responsavel_id = multiselect.id"
-                                    track-by="name" label="name" select-label="Pressione Enter para selecionar"
-                                    placeholder="Selecionar Discipulador" deselect-label="Pressione Enter para remover"
-                                    selected-label="Selecionado" :taggable="true" :multiple="false"
-                                    :show-labels="false">
+                                <Multiselect
+                                    name="responsavel"
+
+                                    track-by="name"
+                                    label="name"
+
+                                    select-label=""
+                                    deselect-label=""
+                                    tagPlaceholder=""
+
+                                    placeholder="Selecionar Discipulador"
+                                    selected-label="Selecionado"
+
+                                    :taggable="true"
+                                    :multiple="false"
+                                    :show-labels="false"
+
+                                    :options="responsaveis"
+                                    v-model="multiselect"
+                                    @select="form.responsavel_id = multiselect.id"
+                                >
+                                    <template #noOptions>Nenhum discipulador cadastrado no sistema</template>
                                 </Multiselect>
+
                                 <InputError :message="form.errors.responsavel_id" class="mt-2" />
                             </div>
 
@@ -128,7 +147,7 @@ const resetForm = (created = false) => {
                                 <InputLabel for="password" value="Senha" />
 
                                 <TextInput id="password" ref="passwordInput" v-model="form.password" type="password"
-                                    class="mt-1 block w-full" autocomplete="new-password" placeholder="****"/>
+                                    class="mt-1 block w-full" autocomplete="new-password" placeholder="********"/>
 
                                 <InputError :message="form.errors.password" class="mt-2" />
                             </div>
@@ -137,13 +156,13 @@ const resetForm = (created = false) => {
                                 <InputLabel for="password_confirmation" value="Confirmação da Senha" />
 
                                 <TextInput id="password_confirmation" v-model="form.password_confirmation" type="password"
-                                    class="mt-1 block w-full" autocomplete="new-password"/>
+                                    class="mt-1 block w-full" autocomplete="new-password" placeholder="********"/>
 
                                 <InputError :message="form.errors.password_confirmation" class="mt-2" />
                             </div>
 
                             <div class="flex items-center gap-4">
-                                <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">Salvar</PrimaryButton>
+                                <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">Salvar</PrimaryButton> <Loading v-if="form.processing"/>
 
                                 <Transition enter-active-class="transition ease-in-out" enter-from-class="opacity-0"
                                     leave-active-class="transition ease-in-out" leave-to-class="opacity-0">

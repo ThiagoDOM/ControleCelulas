@@ -7,6 +7,7 @@ import SecondaryButton from '@/Components/SecondaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { useForm } from '@inertiajs/vue3';
 import { nextTick, ref } from 'vue';
+import Loading from '@/Components/Loading.vue';
 
 const confirmingUserDeletion = ref(false);
 const passwordInput = ref(null);
@@ -87,7 +88,7 @@ const closeModal = () => {
                         @click="deleteUser"
                     >
                         Apagar Minha Conta
-                    </DangerButton>
+                    </DangerButton> <Loading v-if="form.processing" class="mt-2 ml-2"/>
                 </div>
             </div>
         </Modal>

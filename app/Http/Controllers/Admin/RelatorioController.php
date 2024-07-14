@@ -23,16 +23,20 @@ class RelatorioController extends Controller
         $celula = Celula::findOrFail($id);
         $relatorios = Relatorio::query();
 
+        $data = $request->all();
+        $data['order_key'] = isset($data['order_key']) ? $data['order_key'] : 'date';
+        $data['order'] = isset($data['order']) ? $data['order'] : 'true';
+
         $relatorios->where('celula_id', $celula->id);
 
         if ($request->name)
             $relatorios->where('name', 'LIKE', "%$request->name%");
 
 
-        $relatorios->orderBy($request->order_key ?? 'id', $request->order == "true" ? "DESC" : "ASC");
+        $relatorios->orderBy($data['order_key'], $data['order'] == "true" ? "DESC" : "ASC");
 
         return Inertia::render('Admin/Relatorios/List', [
-            'query' => $request->all(),
+            'query' => $data,
             'celula' => $celula,
             'relatorios' => RelatorioResource::collection(
                 $relatorios->paginate()->withQueryString()
@@ -92,9 +96,11 @@ class RelatorioController extends Controller
         $data = $request->all();
         $data['celula_id'] = $id;
 
-        $celula->fill($data);
+        // dd($data);
 
-        $celula->save();
+        $celula->update($data);
+
+        // $celula->save();
 
         return Redirect::route('admin.relatorios.index', $id);
     }

@@ -64,7 +64,10 @@ const form = useForm({
 const changeOrder = (key) => {
     form.order = key == form.order_key ? !form.order : false;
     form.order_key = key;
-    form.get(route(props.routeBase + '.index'))
+    if(props.additionalRoute)
+        form.get(route(props.routeBase + '.index', props.additionalRoute))
+    else
+        form.get(route(props.routeBase + '.index'))
 }
 
 const isOpen = ref(false);

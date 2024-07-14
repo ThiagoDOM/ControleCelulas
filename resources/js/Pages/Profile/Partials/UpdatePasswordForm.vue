@@ -5,6 +5,7 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { useForm } from '@inertiajs/vue3';
 import { ref } from 'vue';
+import Loading from '@/Components/Loading.vue';
 
 const passwordInput = ref(null);
 const currentPasswordInput = ref(null);
@@ -89,7 +90,7 @@ const updatePassword = () => {
             </div>
 
             <div class="flex items-center gap-4">
-                <PrimaryButton :disabled="form.processing">Salvar</PrimaryButton>
+                <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">Salvar</PrimaryButton> <Loading v-if="form.processing"/>
 
                 <Transition
                     enter-active-class="transition ease-in-out"

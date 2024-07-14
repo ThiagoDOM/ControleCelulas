@@ -11,6 +11,8 @@ import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 import Multiselect from "vue-multiselect";
 import "vue-multiselect/dist/vue-multiselect.css";
+import "@/Components/css/multiSelectDarkMode.css";
+import Loading from '@/Components/Loading.vue';
 
 const data = defineProps({
     celula: {
@@ -90,19 +92,35 @@ const resetForm = (created = false) => {
 
                             <div>
                                 <InputLabel for="lider" value="Líder" />
+                                <Multiselect
+                                    name="responsavel"
 
-                                <Multiselect name="lider" v-model="multiselect" :options="lideres"
-                                @select="form.lider_id = multiselect.id"
-                                    track-by="name" label="name" select-label="Pressione Enter para selecionar"
-                                    placeholder="Selecionar Líder" deselect-label="Pressione Enter para remover"
-                                    selected-label="Selecionado" :taggable="true" :multiple="false"
-                                    :show-labels="false">
+                                    track-by="name"
+                                    label="name"
+
+                                    select-label=""
+                                    deselect-label=""
+                                    tagPlaceholder=""
+
+                                    placeholder="Selecionar Líder"
+                                    selected-label="Selecionado"
+
+                                    :taggable="true"
+                                    :multiple="false"
+                                    :show-labels="false"
+
+                                    :options="lideres"
+                                    v-model="multiselect"
+                                    @select="form.lider_id = multiselect.id"
+                                >
+                                    <template #noOptions>Nenhum líder cadastrado no sistema</template>
                                 </Multiselect>
+
                                 <InputError :message="form.errors.lider_id" class="mt-2" />
                             </div>
 
                             <div class="flex items-center gap-4">
-                                <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">Salvar</PrimaryButton>
+                                <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">Salvar</PrimaryButton> <Loading v-if="form.processing"/>
 
                                 <Transition enter-active-class="transition ease-in-out" enter-from-class="opacity-0"
                                     leave-active-class="transition ease-in-out" leave-to-class="opacity-0">

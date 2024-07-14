@@ -10,6 +10,7 @@ import { ref } from 'vue';
 import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 import moment from 'moment';
+import Loading from '@/Components/Loading.vue';
 
 const data = defineProps({
     celula: {
@@ -70,41 +71,46 @@ const resetForm = (created = false) => {
 </script>
 
 <template>
+
     <Head :title="relatorio.id ? 'Editar Relatório' : 'Cadastrar Relatório'" />
 
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">{{ relatorio.id ? 'Editar' :
-                'Cadastrar' }} Relatório</h2>
+            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">{{ relatorio.id ? 'Editar'
+        :
+        'Cadastrar' }} Relatório</h2>
         </template>
         <div class="py-6">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900 dark:text-gray-100">
-                        <form @submit.prevent="relatorio.id ? updateRelatorio() : createRelatorio()" class="mt-6 space-y-6">
+                        <form @submit.prevent="relatorio.id ? updateRelatorio() : createRelatorio()"
+                            class="mt-6 space-y-6">
                             <div>
                                 <InputLabel for="date" value="Data" />
 
                                 <TextInput id="date" type="date" class="mt-1 block w-full" v-model="form.date" required
-                                    autofocus autocomplete="date" />
+                                    autocomplete="date" />
 
                                 <InputError class="mt-2" :message="form.errors.date" />
                             </div>
 
                             <div class="grid grid-cols-1 sm:grid-cols-2">
                                 <div class="me-0 sm:me-2">
-                                    <InputLabel for="membros_totais" value="Total de Membros" />
+                                    <InputLabel for="membros_totais" value="Total de Membros" autofocus/>
 
-                                    <TextInput id="membros_totais" type="number" min="0" max="99" class="mt-1 block w-full" v-model="form.membros_totais" required
-                                        autofocus autocomplete="membros_totais" />
+                                    <TextInput id="membros_totais" type="number" min="0" max="99"
+                                        class="mt-1 block w-full" v-model="form.membros_totais" required
+                                        autocomplete="membros_totais" />
 
                                     <InputError class="mt-2" :message="form.errors.membros_totais" />
                                 </div>
                                 <div class="ms-0 sm:ms-2 mt-6 sm:mt-0">
                                     <InputLabel for="membros_presentes" value="Total de Membros Presentes" />
 
-                                    <TextInput id="membros_presentes" type="number" min="0" max="99" class="mt-1 block w-full" v-model="form.membros_presentes" required
-                                        autofocus autocomplete="membros_presentes" />
+                                    <TextInput id="membros_presentes" type="number" min="0" max="99"
+                                        class="mt-1 block w-full" v-model="form.membros_presentes" required
+                                        autocomplete="membros_presentes" />
 
                                     <InputError class="mt-2" :message="form.errors.membros_presentes" />
                                 </div>
@@ -114,16 +120,17 @@ const resetForm = (created = false) => {
                                 <div class="me-0 sm:me-2">
                                     <InputLabel for="batizados" value="Total de Batizados" />
 
-                                    <TextInput id="batizados" type="number" min="0" max="99" class="mt-1 block w-full" v-model="form.batizados" required
-                                        autofocus autocomplete="batizados" />
+                                    <TextInput id="batizados" type="number" min="0" max="99" class="mt-1 block w-full"
+                                        v-model="form.batizados" required autocomplete="batizados" />
 
                                     <InputError class="mt-2" :message="form.errors.batizados" />
                                 </div>
                                 <div class="ms-0 sm:ms-2 mt-6 sm:mt-0">
                                     <InputLabel for="frequentadores" value="Total de Frequentadores" />
 
-                                    <TextInput id="frequentadores" type="number" min="0" max="99" class="mt-1 block w-full" v-model="form.frequentadores" required
-                                        autofocus autocomplete="frequentadores" />
+                                    <TextInput id="frequentadores" type="number" min="0" max="99"
+                                        class="mt-1 block w-full" v-model="form.frequentadores" required
+                                        autocomplete="frequentadores" />
 
                                     <InputError class="mt-2" :message="form.errors.frequentadores" />
                                 </div>
@@ -133,16 +140,17 @@ const resetForm = (created = false) => {
                                 <div class="me-0 sm:me-2">
                                     <InputLabel for="visitantes" value="Total de Visitantes" />
 
-                                    <TextInput id="visitantes" type="number" min="0" max="99" class="mt-1 block w-full" v-model="form.visitantes" required
-                                        autofocus autocomplete="visitantes" />
+                                    <TextInput id="visitantes" type="number" min="0" max="99" class="mt-1 block w-full"
+                                        v-model="form.visitantes" required autocomplete="visitantes" />
 
                                     <InputError class="mt-2" :message="form.errors.visitantes" />
                                 </div>
                                 <div class="ms-0 sm:ms-2 mt-6 sm:mt-0">
                                     <InputLabel for="vl_oferta" value="Total de Oferta" />
 
-                                    <TextInput id="vl_oferta" type="number" min="0.00" max="999999999" step="0.01" class="mt-1 block w-full" v-model="form.vl_oferta" required
-                                        autofocus autocomplete="vl_oferta" />
+                                    <TextInput id="vl_oferta" type="number" min="0.00" max="999999999" step="0.01"
+                                        class="mt-1 block w-full" v-model="form.vl_oferta" required
+                                        autocomplete="vl_oferta" />
 
                                     <InputError class="mt-2" :message="form.errors.vl_oferta" />
                                 </div>
@@ -151,7 +159,10 @@ const resetForm = (created = false) => {
 
 
                             <div class="flex items-center gap-4">
-                                <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">Salvar</PrimaryButton>
+                                <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                                    Salvar
+                                </PrimaryButton>
+                                <Loading v-if="form.processing" />
 
                                 <Transition enter-active-class="transition ease-in-out" enter-from-class="opacity-0"
                                     leave-active-class="transition ease-in-out" leave-to-class="opacity-0">
