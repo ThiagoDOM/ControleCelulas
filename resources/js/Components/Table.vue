@@ -38,6 +38,10 @@ const props = defineProps({
     additionalParameter: {
         type: String,
         required: false
+    },
+    hideSearch: {
+        type: Boolean,
+        default: false
     }
 });
 
@@ -77,7 +81,7 @@ const itemSelectedAdditional = ref(null);
 </script>
 
 <template>
-    <form class="flex" @submit.prevent="form.get(route(routeBase + '.index', additionalRoute))">
+    <form class="flex" @submit.prevent="form.get(route(routeBase + '.index', additionalRoute))" v-if="!hideSearch">
         <TextInput id="current_password" ref="currentPasswordInput" v-model="form.name" type="text"
             class="mt-1 md:w-60 w-full" placeholder="Nome" />
         <div class="flex-row-reverse">

@@ -29,8 +29,8 @@ class RelatorioController extends Controller
 
         $relatorios->where('celula_id', $celula->id);
 
-        if ($request->name)
-            $relatorios->where('name', 'LIKE', "%$request->name%");
+        // if ($request->name)
+        //     $relatorios->where('name', 'LIKE', "%$request->name%");
 
 
         $relatorios->orderBy($data['order_key'], $data['order'] == "true" ? "DESC" : "ASC");

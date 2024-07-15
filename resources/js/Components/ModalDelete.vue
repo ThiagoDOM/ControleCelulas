@@ -11,23 +11,23 @@
 
             <div class="mt-6 flex justify-end">
                 <SecondaryButton @click="closeModal"> Cancelar </SecondaryButton>
-                <DangerButton class="ms-3" :class="{ 'opacity-25': form.processing }" :disabled="form.processing"
-                    :html="{ '...': form.processing }" @click="deleteUser(id, url)">
+                <DangerButton class="ms-3" :class="{ 'opacity-25': loading }" :disabled="loading"
+                    :html="{ '...': loading }" @click="deleteUser(id, url)">
                     Excluir Item
-                </DangerButton>
+                </DangerButton> <Loading class="ml-3 mt-1" v-if="loading"/>
             </div>
         </div>
     </Modal>
 </template>
 <script setup>
-import { defineEmits } from 'vue';
-import { useForm } from '@inertiajs/vue3';
+import { defineEmits, ref } from 'vue';
 import Modal from '@/Components/Modal.vue';
 import DangerButton from '@/Components/DangerButton.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 import axios from 'axios';
 import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
+import Loading from '@/Components/Loading.vue';
 // import 'vue-toast-notification/dist/theme-default.css';
 
 const props = defineProps({
@@ -44,14 +44,15 @@ const props = defineProps({
 });
 
 const emit = defineEmits(['close', 'error', 'success']);
-const form = useForm({});
 const $toast = useToast();
 const options = {
     position: 'top-right',
     duration: 5000
 };
+const loading = ref(false);
 
 const deleteUser = (id, url) => {
+    loading.value = true;
     if(props.additionalParameter){
         axios.delete(route(url, [props.additionalParameter, id]))
         .then(() => {
@@ -59,15 +60,20 @@ const deleteUser = (id, url) => {
         })
         .catch((err) => {
             errorModal(err?.response.status);
+        })
+        .finally(() => {
+            loading.value = false;
         });
     } else {
-
         axios.delete(route(url, id))
         .then(() => {
             successModal();
         })
         .catch((err) => {
             errorModal(err?.response.status);
+        })
+        .finally(() => {
+            loading.value = false;
         });
     }
 };
@@ -82,7 +88,7 @@ const successModal = () => {
 
 const errorModal = (status) => {
     if(status == 404)
-        $toast.error("Item don't found!", options);
+        $toast.error("Item não encontrado!", options);
     else if(status == 401)
         $toast.error("No permission to delete!", options);
     else
