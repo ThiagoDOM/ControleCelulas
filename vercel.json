@@ -28,6 +28,10 @@
         "dest": "/public/android-chrome-192x192-dark.png"
       },
       {
+        "src": "/android-chrome-512x512.png",
+        "dest": "/public/android-chrome-512x512-dark.png"
+      },
+      {
         "src": "/android-chrome-512x512-dark.png",
         "dest": "/public/android-chrome-512x512-dark.png"
       },
