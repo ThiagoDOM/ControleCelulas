@@ -1,11 +1,76 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Você está offline</title>
+    <style>
+        * {
+            font-family: Figtree, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        }
+
+        body {
+            background-color: #121827;
+            color: #ffffff;
+            margin-top: 5em;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 2em;
+            padding-right: 2em;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        p {
+            margin-top: 2em;
+            text-align: center;
+        }
+
+        button {
+            background-color: rgb(229 231 235 / 1);
+            color: #1f2937;
+            border: 0;
+            padding: 0.5em 1em;
+            border-radius: 0.375rem;
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: rgb(255 255 255 / 1);
+        }
+
+        button:focus {
+            opacity: 0.25;
+        }
+
+        a {
+            text-decoration: none;
+            color: #1f2937;
+        }
+
+        .btn {
+            margin-top: 10em;
+        }
+    </style>
 </head>
+
 <body>
-    <h2>Você está offline</h2>
+    <div>
+        <h1>Você está offline</h1>
+        <p>Parece que vocês está sem conexão com a internet, por favor verifique sua conexão e tente
+            novamente.<br /><br />Clique no botão abaixo para tentar novamente.</p>
+        <div class="btn">
+            <a href="/"><button>TENTAR NOVAMENTE</button></a>
+        </div>
+
+
+    </div>
 </body>
+
 </html>
