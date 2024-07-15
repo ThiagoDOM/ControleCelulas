@@ -21,12 +21,11 @@ const showingNavigationDropdown = ref(false);
                             <!-- Logo -->
                             <div class="shrink-0 flex items-center">
                                 <Link :href="route('admin.dashboard')">
-                                    <!-- <ApplicationLogo
+                                    <ApplicationLogo class="h-9 w-9"/>
+
+                                    <!-- <img src="/android-chrome-192x192-dark.png"
                                         class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200"
                                     /> -->
-                                    <img src="/android-chrome-192x192.png"
-                                        class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200"
-                                    />
                                 </Link>
                             </div>
 

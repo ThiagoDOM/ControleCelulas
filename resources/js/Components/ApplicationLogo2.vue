@@ -5,17 +5,17 @@
         />
     </svg> -->
     <!-- <img src="/android-chrome-192x192.png" class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" /> -->
-    <div class="logoApplication"></div>
+    <div class="logoApplication2"></div>
 </template>
 <style>
-.logoApplication {
-    background-image: url("/android-chrome-192x192.png");
+.logoApplication2 {
+    background-image: url("/android-chrome-512x512.png");
     background-size: cover;
 }
 
 @media (prefers-color-scheme: dark) {
-    .logoApplication {
-    background-image: url("/android-chrome-192x192-dark.png");
+    .logoApplication2 {
+    background-image: url("/android-chrome-512x512-dark.png");
 }
 }
 </style>

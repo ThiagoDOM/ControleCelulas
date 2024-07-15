@@ -1,5 +1,5 @@
 <script setup>
-import ApplicationLogo from '@/Components/ApplicationLogo.vue';
+import ApplicationLogo2 from '@/Components/ApplicationLogo2.vue';
 import { Link } from '@inertiajs/vue3';
 import { onMounted } from 'vue'
 
@@ -39,7 +39,8 @@ onMounted(() => {
         <div>
             <Link href="/">
             <!-- <ApplicationLogo class="w-20 h-20 fill-current text-gray-500" /> -->
-            <img src="/android-chrome-512x512.png" class="w-20 h-20 fill-current text-gray-500" />
+            <!-- <img src="/android-chrome-512x512.png" class="w-20 h-20 fill-current text-gray-500" /> -->
+            <ApplicationLogo2 class="h-20 w-20"/>
             </Link>
         </div>
 
