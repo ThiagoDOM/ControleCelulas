@@ -29,14 +29,14 @@ class UserRequest extends FormRequest
             $id = request()->route('admin') ?? request()->route('pastore') ?? request()->route('discipuladore') ?? request()->route('lidere');
             $request = [
                 'name' => ['required', 'string', 'max:255'],
-                'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)->ignore($id)],
+                'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)->ignore($id)->whereNull('deleted_at')],
                 'telefone' => 'nullable',
                 'password' => ['nullable', 'confirmed', Rules\Password::defaults()],
             ];
         } else {
             $request = [
                 'name' => ['required', 'string', 'max:255'],
-                'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)],
+                'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)->whereNull('deleted_at')],
                 'telefone' => 'nullable',
                 'password' => ['required', 'confirmed', Rules\Password::defaults()],
             ];
