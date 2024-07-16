@@ -81,12 +81,14 @@ const itemSelectedAdditional = ref(null);
 </script>
 
 <template>
-    <form class="flex" @submit.prevent="form.get(route(routeBase + '.index', additionalRoute))" v-if="!hideSearch">
+    <form class="flex" @submit.prevent="form.get(route(routeBase + '.index', additionalRoute))">
+
         <TextInput id="current_password" ref="currentPasswordInput" v-model="form.name" type="text"
-            class="mt-1 md:w-60 w-full" placeholder="Nome" />
+            class="mt-1 md:w-60 w-full" placeholder="Nome" v-if="!hideSearch" />
         <div class="flex-row-reverse">
-            <button type="submit" class="px-3 py-3"><font-awesome-icon :icon="['fas', 'magnifying-glass']" /></button>
+            <button type="submit" class="px-3 py-3" v-if="!hideSearch"><font-awesome-icon :icon="['fas', 'magnifying-glass']" /></button>
         </div>
+
         <div class="ml-auto mt-2">
             <Link v-if="route().has(routeBase + '.create')" :href="route(routeBase + '.create', additionalRoute)">
             <PrimaryButton>Cadastrar</PrimaryButton>

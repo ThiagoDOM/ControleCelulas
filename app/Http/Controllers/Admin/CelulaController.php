@@ -55,6 +55,7 @@ class CelulaController extends Controller
     public function store(CelulaRequest $request)
     {
         $data = $request->all();
+        $data['cep'] = str_replace('-', '', $data['cep']);
 
         $celula = Celula::create($data);
 
@@ -91,7 +92,7 @@ class CelulaController extends Controller
         $celula = Celula::findOrFail($id);
 
         $data = $request->all();
-
+        $data['cep'] = str_replace('-', '', $data['cep']);
 
         $celula->fill($data);
 

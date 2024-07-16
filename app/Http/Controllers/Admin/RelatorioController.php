@@ -68,7 +68,11 @@ class RelatorioController extends Controller
         $data = $request->all();
         $data['celula_id'] = $id;
 
-        $celula = Relatorio::create($data);
+        $data['vl_oferta'] = str_replace('R$ ', '', $data['vl_oferta']);
+        $data['vl_oferta'] = str_replace('.', '', $data['vl_oferta']);
+        $data['vl_oferta'] = str_replace(',', '.', $data['vl_oferta']);
+
+        $relatorio = Relatorio::create($data);
 
         return Redirect::route('admin.relatorios.index', $id);
     }
@@ -96,11 +100,13 @@ class RelatorioController extends Controller
         $data = $request->all();
         $data['celula_id'] = $id;
 
-        // dd($data);
+        $data['vl_oferta'] = str_replace('R$ ', '', $data['vl_oferta']);
+        $data['vl_oferta'] = str_replace('.', '', $data['vl_oferta']);
+        $data['vl_oferta'] = str_replace(',', '.', $data['vl_oferta']);
 
-        $celula->update($data);
+        $relatorio->fill($data);
 
-        // $celula->save();
+        $relatorio->save();
 
         return Redirect::route('admin.relatorios.index', $id);
     }

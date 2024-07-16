@@ -68,6 +68,22 @@ const resetForm = (created = false) => {
     router.reload();
 }
 
+const config = {
+          prefix: 'R$ ',
+          suffix: '',
+          thousands: '.',
+          decimal: ',',
+          precision: 2,
+          disableNegative: true,
+          disabled: false,
+          min: 0,
+          max: null,
+          allowBlank: false,
+          minimumNumberOfCharacters: 0,
+          shouldRound: true,
+          focusOnRight: false,
+        };
+
 </script>
 
 <template>
@@ -89,8 +105,7 @@ const resetForm = (created = false) => {
                             <div>
                                 <InputLabel for="date" value="Data" />
 
-                                <TextInput id="date" type="date" class="mt-1 block w-full" v-model="form.date" required
-                                    autocomplete="date" />
+                                <TextInput id="date" type="date" class="mt-1 block w-full" v-model="form.date" required />
 
                                 <InputError class="mt-2" :message="form.errors.date" />
                             </div>
@@ -100,8 +115,7 @@ const resetForm = (created = false) => {
                                     <InputLabel for="membros_totais" value="Total de Membros" autofocus/>
 
                                     <TextInput id="membros_totais" type="number" min="0" max="99"
-                                        class="mt-1 block w-full" v-model="form.membros_totais" required
-                                        autocomplete="membros_totais" />
+                                        class="mt-1 block w-full" v-model="form.membros_totais" required />
 
                                     <InputError class="mt-2" :message="form.errors.membros_totais" />
                                 </div>
@@ -109,8 +123,7 @@ const resetForm = (created = false) => {
                                     <InputLabel for="membros_presentes" value="Total de Membros Presentes" />
 
                                     <TextInput id="membros_presentes" type="number" min="0" max="99"
-                                        class="mt-1 block w-full" v-model="form.membros_presentes" required
-                                        autocomplete="membros_presentes" />
+                                        class="mt-1 block w-full" v-model="form.membros_presentes" required />
 
                                     <InputError class="mt-2" :message="form.errors.membros_presentes" />
                                 </div>
@@ -121,7 +134,7 @@ const resetForm = (created = false) => {
                                     <InputLabel for="batizados" value="Total de Batizados" />
 
                                     <TextInput id="batizados" type="number" min="0" max="99" class="mt-1 block w-full"
-                                        v-model="form.batizados" required autocomplete="batizados" />
+                                        v-model="form.batizados" required />
 
                                     <InputError class="mt-2" :message="form.errors.batizados" />
                                 </div>
@@ -129,8 +142,7 @@ const resetForm = (created = false) => {
                                     <InputLabel for="frequentadores" value="Total de Frequentadores" />
 
                                     <TextInput id="frequentadores" type="number" min="0" max="99"
-                                        class="mt-1 block w-full" v-model="form.frequentadores" required
-                                        autocomplete="frequentadores" />
+                                        class="mt-1 block w-full" v-model="form.frequentadores" required />
 
                                     <InputError class="mt-2" :message="form.errors.frequentadores" />
                                 </div>
@@ -141,16 +153,15 @@ const resetForm = (created = false) => {
                                     <InputLabel for="visitantes" value="Total de Visitantes" />
 
                                     <TextInput id="visitantes" type="number" min="0" max="99" class="mt-1 block w-full"
-                                        v-model="form.visitantes" required autocomplete="visitantes" />
+                                        v-model="form.visitantes" required />
 
                                     <InputError class="mt-2" :message="form.errors.visitantes" />
                                 </div>
                                 <div class="ms-0 sm:ms-2 mt-6 sm:mt-0">
                                     <InputLabel for="vl_oferta" value="Total de Oferta" />
 
-                                    <TextInput id="vl_oferta" type="number" min="0.00" max="999999999" step="0.01"
-                                        class="mt-1 block w-full" v-model="form.vl_oferta" required
-                                        autocomplete="vl_oferta" />
+                                    <TextInput id="vl_oferta" type="text"
+                                        class="mt-1 block w-full" v-model.lazy="form.vl_oferta" required v-money3="config" />
 
                                     <InputError class="mt-2" :message="form.errors.vl_oferta" />
                                 </div>

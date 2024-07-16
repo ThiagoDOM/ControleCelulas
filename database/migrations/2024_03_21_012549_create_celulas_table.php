@@ -14,10 +14,18 @@ return new class extends Migration
         Schema::create('celulas', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('numero')->nullable();
-            $table->string('dia')->nullable();
-            $table->string('hora')->nullable();
-            $table->string('endereco')->nullable();
+
+            $table->enum('rede', ['kids', 'aguia', 'familia']);
+            $table->tinyInteger('dia');
+            $table->time('hora');
+            $table->char('cep', 8);
+            $table->char('uf', 2);
+            $table->string('cidade');
+            $table->string('bairro');
+            $table->string('logradouro');
+            $table->integer('numero')->nullable();
+            $table->string('complemento')->nullable();
+
             $table->unsignedBigInteger('lider_id');
             $table->timestamps();
         });

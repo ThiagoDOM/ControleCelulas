@@ -16,7 +16,17 @@ class Celula extends Model
      */
     protected $fillable = [
         'name',
-        'lider_id'
+        'lider_id',
+        'rede',
+        'dia',
+        'hora',
+        'cep',
+        'uf',
+        'cidade',
+        'bairro',
+        'logradouro',
+        'numero',
+        'complemento'
     ];
 
     public function lider() {

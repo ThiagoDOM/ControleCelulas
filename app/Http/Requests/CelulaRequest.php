@@ -29,6 +29,17 @@ class CelulaRequest extends FormRequest
         $request = [
             'name' => ['required', 'string', 'max:255'],
             'lider_id' => 'required',
+            'rede' => 'required',
+            'dia' => 'required',
+            'hora' => 'required',
+            'cep' => 'required',
+            'uf' => 'required',
+            'cidade' => 'required',
+            'bairro' => 'required',
+            'logradouro' => 'required',
+            'numero' => 'nullable',
+            'complemento' => 'nullable',
+
         ];
 
         return $request;

@@ -38,3 +38,10 @@ defineExpose({ focus: () => input.value.focus() });
         :data-maska="mask"
     />
 </template>
+<style>
+    @media (prefers-color-scheme: dark) {
+        input {
+            color-scheme: dark;
+        }
+    }
+</style>

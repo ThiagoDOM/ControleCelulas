@@ -9,6 +9,9 @@ import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import './icons';
 
+import { MaskInput } from 'vue-3-mask';
+import money from 'v-money3'
+
 const appName = 'Controle de Células';
 
 createInertiaApp({
@@ -21,6 +24,8 @@ createInertiaApp({
 
         return VueApp
             .component('font-awesome-icon', FontAwesomeIcon)
+            .component('MaskInput', MaskInput)
+            .use(money)
             .use(plugin)
             .use(ZiggyVue)
             .mount(el);

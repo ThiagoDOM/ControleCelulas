@@ -10,7 +10,17 @@
     font-family: Figtree, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
+.multiselect__tags {
+    height: 41.6px;
+    margin-top: 4px;
+}
+
 @media (prefers-color-scheme: dark) {
+
+    .multiselect__option--selected {
+        background: #33405e;
+    }
+
     .multiselect__tags {
         border: 1px solid #384151;
         background: #121827;
