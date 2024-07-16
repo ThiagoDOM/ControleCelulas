@@ -243,7 +243,7 @@ const OpenModal = () => {
                                     <InputLabel for="numero" value="Número" />
 
                                     <TextInput id="numero" type="text" class="mt-1 block w-full" v-model="form.numero"
-                                        autocomplete="numero" placeholder="000" />
+                                        autocomplete="numero" placeholder="000" mask="#############" />
 
                                     <InputError class="mt-2" :message="form.errors.numero" />
                                 </div>
