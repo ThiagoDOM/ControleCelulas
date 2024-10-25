@@ -35,7 +35,7 @@ const results = ref([]);
 const errors = ref({});
 
 const cidade = ref(null);
-const logradouro = ref(null);
+const logradouro = ref('');
 
 const selectedCep = ref(null);
 const loading = ref(false);
@@ -52,20 +52,10 @@ const search = () => {
     if (!cidade.value || !logradouro.value) {
         loading.value = false;
         // Errors no form
-        if (!cidade.value && !logradouro.value) {
-            errors.value = {
-                cidade: "Selecione uma cidade.",
-                logradouro: "Digite o logradouro."
-            };
-        } else if (!cidade.value) {
-            errors.value = {
-                cidade: "Selecione uma cidade."
-            };
-        } else {
-            errors.value = {
-                logradouro: "Digite o logradouro."
-            };
-        }
+        if (!cidade.value)
+            errors.value.cidade ="Selecione uma cidade.";
+        if (!logradouro.value)
+            errors.value.logradouro ="Digite o logradouro.";
     }
     // Form Request
     else {

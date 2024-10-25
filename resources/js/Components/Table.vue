@@ -32,7 +32,7 @@ const props = defineProps({
         type: String
     },
     additionalRoute: {
-        type: String,
+        type: Number,
         required: false
     },
     additionalParameter: {

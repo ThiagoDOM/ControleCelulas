@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, ref } from 'vue';
-import { vMaska } from "maska"
+import { vMaska } from "maska/vue"
 
 defineProps({
     modelValue: {

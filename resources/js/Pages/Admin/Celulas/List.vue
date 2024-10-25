@@ -52,7 +52,7 @@ const columns = [
                     <div class="p-6 text-gray-900 dark:text-gray-100">
                         <Table :items="celulas" :columns="columns" :query="query" :routeBase="'admin.celulas'">
                             <template v-slot="actions">
-                                <Link v-if="route().has('admin.relatorios.index', actions.item.id)" :data-tooltip-target="'tooltip-default-'+actions.item.id"
+                                <Link :data-tooltip-target="'tooltip-default-'+actions.item.id"
                                     :href="route('admin.relatorios.index', actions.item.id)" class="mr-3">
                                 <SecondaryButton><font-awesome-icon :icon="['fas', 'file-invoice']" /></SecondaryButton>
                                 </Link>
@@ -62,8 +62,6 @@ const columns = [
                                 </div>
                             </template>
                         </Table>
-
-
                     </div>
                 </div>
             </div>
