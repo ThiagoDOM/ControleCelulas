@@ -126,22 +126,19 @@ const showingNavigationDropdown = ref(false);
                     class="sm:hidden"
                 >
                     <div class="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink :href="route('admin.dashboard')" :active="route().current('dashboard')">
-                            Admin Dashboard
+                        <ResponsiveNavLink :href="route('home')" :active="route().current('home')">
+                            Dashboard
                         </ResponsiveNavLink>
-                        <ResponsiveNavLink :href="route('admin.admins.index')" :active="route().current('admin.admins.index')">
-                            Admins
-                        </ResponsiveNavLink>
-                        <ResponsiveNavLink :href="route('admin.pastores.index')" :active="route().current('admin.pastores.index')">
+                        <ResponsiveNavLink v-if="$page.props.auth.user.role == 'pastor-adm'" :href="route('admin.pastores.index')" :active="route().current('admin.pastores.index')">
                             Pastores
                         </ResponsiveNavLink>
-                        <ResponsiveNavLink :href="route('pastor.discipuladores.index')" :active="route().current('pastor.discipuladores.index')">
+                        <ResponsiveNavLink v-if="$page.props.auth.user.role == 'pastor'" :href="route('pastor.discipuladores.index')" :active="route().current('pastor.discipuladores.index')">
                             Discipuladores
                         </ResponsiveNavLink>
-                        <ResponsiveNavLink :href="route('discipulador.lideres.index')" :active="route().current('discipulador.lideres.index')">
+                        <ResponsiveNavLink v-if="$page.props.auth.user.role == 'discipulador' || $page.props.auth.user.role == 'pastor'" :href="route('discipulador.lideres.index')" :active="route().current('discipulador.lideres.index')">
                             Líderes
                         </ResponsiveNavLink>
-                        <ResponsiveNavLink :href="route('lider.celulas.index')" :active="route().current('lider.celulas.index')">
+                        <ResponsiveNavLink v-if="$page.props.auth.user.role == 'lider' || $page.props.auth.user.role == 'discipulador' || $page.props.auth.user.role == 'pastor'" :href="route('lider.celulas.index')" :active="route().current('lider.celulas.index')">
                             Células
                         </ResponsiveNavLink>
                     </div>

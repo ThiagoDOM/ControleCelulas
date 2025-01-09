@@ -40,7 +40,7 @@ const form = useForm({
 
 
 const updateRelatorio = () => {
-    form.patch(route('admin.relatorios.update', [data.celula.id, data.relatorio.id]), {
+    form.patch(route('lider.relatorios.update', [data.celula.id, data.relatorio.id]), {
         preserveScroll: true,
         onSuccess: () => resetForm(),
         onError: () => {
@@ -50,7 +50,7 @@ const updateRelatorio = () => {
 };
 
 const createRelatorio = () => {
-    form.post(route('admin.relatorios.store', data.celula.id), {
+    form.post(route('lider.relatorios.store', data.celula.id), {
         preserveScroll: true,
         onSuccess: () => resetForm(true),
         onError: () => {

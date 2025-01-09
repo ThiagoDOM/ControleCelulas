@@ -74,7 +74,7 @@ class RelatorioController extends Controller
 
         $relatorio = Relatorio::create($data);
 
-        return Redirect::route('admin.relatorios.index', $id);
+        return Redirect::route('lider.relatorios.index', $id);
     }
 
     public function edit($id, $relatorio)
@@ -108,7 +108,7 @@ class RelatorioController extends Controller
 
         $relatorio->save();
 
-        return Redirect::route('admin.relatorios.index', $id);
+        return Redirect::route('lider.relatorios.index', $id);
     }
 
     /**
