@@ -61,7 +61,7 @@ class DiscipuladorController extends Controller
         $data['telefone'] = FuncHelper::desmascararTelefone($data['telefone']);
         $user = User::create($data);
 
-        return Redirect::route('admin.discipuladores.index');
+        return Redirect::route('pastor.discipuladores.index');
     }
 
     /**
@@ -115,7 +115,7 @@ class DiscipuladorController extends Controller
 
         $user->save();
 
-        return Redirect::route('admin.discipuladores.index');
+        return Redirect::route('pastor.discipuladores.index');
     }
 
     /**

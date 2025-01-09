@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\PastorController;
 use App\Http\Controllers\Admin\DiscipuladorController;
 use App\Http\Controllers\Admin\LiderController;
 use App\Http\Controllers\Admin\CelulaController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\RelatorioController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ProfileController;
@@ -46,14 +47,25 @@ Route::get('/email-test', fn () => "Just simple email test.")
     ->middleware(['auth', 'verified'])->name('email-test');
 
 Route::middleware(['auth','admin'])->name('admin.')->prefix('admin')->group(function () {
-    Route::get('/dashboard', function () {
-        return Inertia::render('Admin/Dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', DashboardController::class)->name('dashboard');
 
     Route::resource('admins', AdminController::class);
     Route::resource('pastores', PastorController::class);
+    // Route::resource('discipuladores', DiscipuladorController::class);
+    // Route::resource('lideres', LiderController::class);
+    // Route::resource('celulas', CelulaController::class);
+    // Route::resource('celulas/{celula}/relatorios', RelatorioController::class);
+});
+
+Route::middleware(['auth','pastor'])->name('pastor.')->prefix('pastor')->group(function () {
     Route::resource('discipuladores', DiscipuladorController::class);
+});
+
+Route::middleware(['auth','discipulador'])->name('discipulador.')->prefix('discipulador')->group(function () {
     Route::resource('lideres', LiderController::class);
+});
+
+Route::middleware(['auth', 'lider'])->name('lider.')->prefix('lider')->group(function () {
     Route::resource('celulas', CelulaController::class);
     Route::resource('celulas/{celula}/relatorios', RelatorioController::class);
 });

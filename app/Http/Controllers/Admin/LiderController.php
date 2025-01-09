@@ -61,7 +61,7 @@ class LiderController extends Controller
         $data['telefone'] = FuncHelper::desmascararTelefone($data['telefone']);
         $user = User::create($data);
 
-        return Redirect::route('admin.lideres.index');
+        return Redirect::route('discipulador.lideres.index');
     }
 
     /**
@@ -115,7 +115,7 @@ class LiderController extends Controller
 
         $user->save();
 
-        return Redirect::route('admin.lideres.index');
+        return Redirect::route('discipulador.lideres.index');
     }
 
     /**

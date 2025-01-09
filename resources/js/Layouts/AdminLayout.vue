@@ -40,13 +40,13 @@ const showingNavigationDropdown = ref(false);
                                 <NavLink :href="route('admin.pastores.index')" :active="route().current('admin.pastores.index')">
                                     Pastores
                                 </NavLink>
-                                <NavLink :href="route('admin.discipuladores.index')" :active="route().current('admin.discipuladores.index')">
+                                <NavLink :href="route('pastor.discipuladores.index')" :active="route().current('pastor.discipuladores.index')">
                                     Discipuladores
                                 </NavLink>
-                                <NavLink :href="route('admin.lideres.index')" :active="route().current('admin.lideres.index')">
+                                <NavLink :href="route('discipulador.lideres.index')" :active="route().current('discipulador.lideres.index')">
                                     Líderes
                                 </NavLink>
-                                <NavLink :href="route('admin.celulas.index')" :active="route().current('admin.celulas.index')">
+                                <NavLink :href="route('lider.celulas.index')" :active="route().current('lider.celulas.index')">
                                     Células
                                 </NavLink>
                             </div>
@@ -138,13 +138,13 @@ const showingNavigationDropdown = ref(false);
                         <ResponsiveNavLink :href="route('admin.pastores.index')" :active="route().current('admin.pastores.index')">
                             Pastores
                         </ResponsiveNavLink>
-                        <ResponsiveNavLink :href="route('admin.discipuladores.index')" :active="route().current('admin.discipuladores.index')">
+                        <ResponsiveNavLink :href="route('pastor.discipuladores.index')" :active="route().current('pastor.discipuladores.index')">
                             Discipuladores
                         </ResponsiveNavLink>
-                        <ResponsiveNavLink :href="route('admin.lideres.index')" :active="route().current('admin.lideres.index')">
+                        <ResponsiveNavLink :href="route('discipulador.lideres.index')" :active="route().current('discipulador.lideres.index')">
                             Líderes
                         </ResponsiveNavLink>
-                        <ResponsiveNavLink :href="route('admin.celulas.index')" :active="route().current('admin.celulas.index')">
+                        <ResponsiveNavLink :href="route('lider.celulas.index')" :active="route().current('lider.celulas.index')">
                             Células
                         </ResponsiveNavLink>
                     </div>

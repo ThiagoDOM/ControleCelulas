@@ -20,9 +20,10 @@ const showingNavigationDropdown = ref(false);
                         <div class="flex">
                             <!-- Logo -->
                             <div class="shrink-0 flex items-center">
-                                <Link :href="route('home')">
+                                <Link :href="route('admin.dashboard')">
                                     <ApplicationLogo class="h-9 w-9"/>
-                                    <!-- <img src="/android-chrome-192x192.png"
+
+                                    <!-- <img src="/android-chrome-192x192-dark.png"
                                         class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200"
                                     /> -->
                                 </Link>
@@ -30,8 +31,20 @@ const showingNavigationDropdown = ref(false);
 
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink :href="route('home')" :active="route().current('dashboard')">
+                                <NavLink :href="route('home')" :active="route().current('home')">
                                     Dashboard
+                                </NavLink>
+                                <NavLink v-if="$page.props.auth.user.role == 'pastor-adm'" :href="route('admin.pastores.index')" :active="route().current('admin.pastores.index')">
+                                    Pastores
+                                </NavLink>
+                                <NavLink v-if="$page.props.auth.user.role == 'pastor'" :href="route('pastor.discipuladores.index')" :active="route().current('pastor.discipuladores.index')">
+                                    Discipuladores
+                                </NavLink>
+                                <NavLink v-if="$page.props.auth.user.role == 'discipulador' || $page.props.auth.user.role == 'pastor'" :href="route('discipulador.lideres.index')" :active="route().current('discipulador.lideres.index')">
+                                    Líderes
+                                </NavLink>
+                                <NavLink v-if="$page.props.auth.user.role == 'lider' || $page.props.auth.user.role == 'discipulador' || $page.props.auth.user.role == 'pastor'" :href="route('lider.celulas.index')" :active="route().current('lider.celulas.index')">
+                                    Células
                                 </NavLink>
                             </div>
                         </div>
@@ -113,8 +126,23 @@ const showingNavigationDropdown = ref(false);
                     class="sm:hidden"
                 >
                     <div class="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink :href="route('home')" :active="route().current('dashboard')">
-                            Dashboard
+                        <ResponsiveNavLink :href="route('admin.dashboard')" :active="route().current('dashboard')">
+                            Admin Dashboard
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('admin.admins.index')" :active="route().current('admin.admins.index')">
+                            Admins
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('admin.pastores.index')" :active="route().current('admin.pastores.index')">
+                            Pastores
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('pastor.discipuladores.index')" :active="route().current('pastor.discipuladores.index')">
+                            Discipuladores
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('discipulador.lideres.index')" :active="route().current('discipulador.lideres.index')">
+                            Líderes
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('lider.celulas.index')" :active="route().current('lider.celulas.index')">
+                            Células
                         </ResponsiveNavLink>
                     </div>
 

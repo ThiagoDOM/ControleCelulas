@@ -13,7 +13,9 @@ import Multiselect from "vue-multiselect";
 import "vue-multiselect/dist/vue-multiselect.css";
 import "@/Components/css/multiSelectDarkMode.css";
 import Loading from '@/Components/Loading.vue';
-import ModalSearchCep from '@/Components/ModalSearchCep.vue'
+import ModalSearchCep from '@/Components/ModalSearchCep.vue';
+
+const user = computed(() => usePage().props.auth.user);
 
 const data = defineProps({
     celula: {
@@ -33,7 +35,7 @@ const options = {
 
 const form = useForm({
     name: data.celula.name ?? '',
-    lider_id: data.celula.lider_id ?? '',
+    lider_id: user.value.role == 'lider' ? user.value.id : data.celula.lider_id,
 
     cep: data.celula.cep ?? '',
     uf: data.celula.uf ?? '',
@@ -56,7 +58,7 @@ const rede = ref(redes.find((objeto) => objeto.id === form.rede));
 const dia = ref(dias.find((objeto) => objeto.id === form.dia));
 
 const updateCelula = () => {
-    form.patch(route('admin.celulas.update', usePage().props.celula.id), {
+    form.patch(route('lider.celulas.update', data.celula.id), {
         preserveScroll: true,
         onSuccess: () => resetForm(),
         onError: () => {
@@ -66,7 +68,7 @@ const updateCelula = () => {
 };
 
 const createCelula = () => {
-    form.post(route('admin.celulas.store'), {
+    form.post(route('lider.celulas.store'), {
         preserveScroll: true,
         onSuccess: () => resetForm(true),
         onError: () => {
@@ -170,7 +172,10 @@ const OpenModal = () => {
                             <div class="grid sm:grid-cols-2 grid-cols-1 gap-4">
                                 <div>
                                     <InputLabel for="lider" value="Líder" />
-                                    <Multiselect name="lider" id="lider" track-by="name" label="name" select-label=""
+                                    <select class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm mt-1 block w-full" v-if="$page.props.auth.user.role == 'lider'" v-model="form.lider_id" disabled>
+                                    <option :value="$page.props.auth.user.id" selected>{{ $page.props.auth.user.name }}</option>
+                                </select>
+                                    <Multiselect v-else name="lider" id="lider" track-by="name" label="name" select-label=""
                                         deselect-label="" tagPlaceholder="" placeholder="Selecionar Líder"
                                         selected-label="Selecionado" :taggable="true" :multiple="false"
                                         :show-labels="false" :options="lideres" v-model="multiselect"

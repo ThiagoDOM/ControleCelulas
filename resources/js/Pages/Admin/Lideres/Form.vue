@@ -6,13 +6,15 @@ import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Link, useForm, usePage } from '@inertiajs/vue3';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { useToast } from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 import Multiselect from "vue-multiselect";
 import "vue-multiselect/dist/vue-multiselect.css";
 import "@/Components/css/multiSelectDarkMode.css";
 import Loading from '@/Components/Loading.vue';
+
+const user = computed(() => usePage().props.auth.user);
 
 const data = defineProps({
     user: {
@@ -35,7 +37,7 @@ const form = useForm({
     name: usePage().props?.user.name ?? '',
     email: usePage().props?.user.email ?? '',
     telefone: usePage().props?.user.telefone ?? '',
-    responsavel_id: usePage().props?.user.responsavel_id ?? '',
+    responsavel_id: user.value.role == 'discipulador' ? user.value.id : usePage().props?.user.responsavel_id ?? '',
     password: '',
     password_confirmation: '',
 });
@@ -43,7 +45,7 @@ const form = useForm({
 const multiselect = ref(data.responsaveis.find((objeto) => objeto.id === form.responsavel_id));
 
 const updateUser = () => {
-    form.patch(route('admin.lideres.update', usePage().props.user.id), {
+    form.patch(route('discipulador.lideres.update', usePage().props.user.id), {
         preserveScroll: true,
         onSuccess: () => resetForm(),
         onError: () => {
@@ -53,7 +55,7 @@ const updateUser = () => {
 };
 
 const createUser = () => {
-    form.post(route('admin.lideres.store'), {
+    form.post(route('discipulador.lideres.store'), {
         preserveScroll: true,
         onSuccess: () => resetForm(true),
         onError: () => {
@@ -116,7 +118,10 @@ const resetForm = (created = false) => {
                             <div>
                                 <InputLabel for="responsavel" value="Discipulador" />
 
-                                <Multiselect
+                                <select class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm mt-1 block w-full" v-if="$page.props.auth.user.role == 'discipulador'" v-model="form.responsavel_id" disabled>
+                                    <option :value="$page.props.auth.user.id" selected>{{ $page.props.auth.user.name }}</option>
+                                </select>
+                                <Multiselect v-else
                                     name="responsavel"
 
                                     track-by="name"

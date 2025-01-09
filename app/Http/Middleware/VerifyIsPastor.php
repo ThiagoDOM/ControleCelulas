@@ -15,7 +15,7 @@ class VerifyIsPastor
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if($request->user() && $request->user()->is('pastor'))
+        if($request->user() && ($request->user()->is('pastor') || $request->user()->is('admin')))
             return $next($request);
         else
             return abort(404);

@@ -59,7 +59,7 @@ class CelulaController extends Controller
 
         $celula = Celula::create($data);
 
-        return Redirect::route('admin.celulas.index');
+        return Redirect::route('lider.celulas.index');
     }
 
     /**
@@ -98,7 +98,7 @@ class CelulaController extends Controller
 
         $celula->save();
 
-        return Redirect::route('admin.celulas.index');
+        return Redirect::route('lider.celulas.index');
     }
 
     /**

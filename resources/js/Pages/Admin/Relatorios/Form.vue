@@ -30,12 +30,12 @@ const options = {
 const form = useForm({
     celula_id: data.celula.id ?? '',
     date: data.relatorio.date ?? moment().locale('pt-br').format('YYYY-MM-DD'),
-    membros_totais: data.relatorio.membros_totais,
-    membros_presentes: data.relatorio.membros_presentes,
-    batizados: data.relatorio.batizados,
-    frequentadores: data.relatorio.frequentadores,
-    visitantes: data.relatorio.visitantes,
-    vl_oferta: data.relatorio.vl_oferta,
+    membros_totais: data.relatorio.membros_totais ?? '0',
+    membros_presentes: data.relatorio.membros_presentes ?? '0',
+    batizados: data.relatorio.batizados ?? '0',
+    frequentadores: data.relatorio.frequentadores ?? '0',
+    visitantes: data.relatorio.visitantes ?? '0',
+    vl_oferta: data.relatorio.vl_oferta ?? '0',
 });
 
 
@@ -112,7 +112,7 @@ const config = {
 
                             <div class="grid grid-cols-1 sm:grid-cols-2">
                                 <div class="me-0 sm:me-2">
-                                    <InputLabel for="membros_totais" value="Total de Membros" autofocus/>
+                                    <InputLabel for="membros_totais" value="Total de Membros da Célula" autofocus/>
 
                                     <TextInput id="membros_totais" type="number" min="0" max="99"
                                         class="mt-1 block w-full" v-model="form.membros_totais" required />
@@ -161,7 +161,7 @@ const config = {
                                     <InputLabel for="vl_oferta" value="Total de Oferta" />
 
                                     <TextInput id="vl_oferta" type="text"
-                                        class="mt-1 block w-full" v-model.lazy="form.vl_oferta" required v-money3="config" />
+                                        class="mt-1 block w-full" v-model="form.vl_oferta" required v-money3="config" />
 
                                     <InputError class="mt-2" :message="form.errors.vl_oferta" />
                                 </div>

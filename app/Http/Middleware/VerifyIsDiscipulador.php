@@ -15,7 +15,7 @@ class VerifyIsDiscipulador
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if($request->user() && $request->user()->is('discipulador'))
+        if($request->user() && ($request->user()->is('discipulador') || $request->user()->is('pastor') || $request->user()->is('admin')))
             return $next($request);
         else
             return abort(404);

@@ -50,10 +50,10 @@ const columns = [
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900 dark:text-gray-100">
-                        <Table :items="celulas" :columns="columns" :query="query" :routeBase="'admin.celulas'">
+                        <Table :items="celulas" :columns="columns" :query="query" :routeBase="'lider.celulas'">
                             <template v-slot="actions">
                                 <Link :data-tooltip-target="'tooltip-default-'+actions.item.id"
-                                    :href="route('admin.relatorios.index', actions.item.id)" class="mr-3">
+                                    :href="route('lider.relatorios.index', actions.item.id)" class="mr-3">
                                 <SecondaryButton><font-awesome-icon :icon="['fas', 'file-invoice']" /></SecondaryButton>
                                 </Link>
                                 <div :id="'tooltip-default-'+actions.item.id" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
