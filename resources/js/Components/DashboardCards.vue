@@ -33,7 +33,7 @@ if (props.money) {
             {{ title }}
         </h2>
         <p
-            class="text-4xl font-bold"
+            class="text-4xl font-bold text-blue-500"
             :class="{ 'text-2xl': money }, 'text-' + color + '-500'"
         >
             {{ valor }}
