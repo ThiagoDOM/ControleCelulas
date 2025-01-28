@@ -101,13 +101,5 @@
       "VIEW_COMPILED_PATH": "/tmp/views",
       "SSR_TEMP_PATH": "/tmp/ssr",
       "NODE_PATH": "node",
-
-      "DB_CONNECTION": "pgsql",
-      "DB_URL": "postgresql://controleCelulas_owner:ZI0nE2ySqope@ep-twilight-surf-a5j1f6vs.us-east-2.aws.neon.tech/controleCelulas?sslmode=require",
-      "DB_HOST": "ep-twilight-surf-a5j1f6vs.us-east-2.aws.neon.tech",
-      "DB_PORT": "5432",
-      "DB_DATABASE": "controleCelulas",
-      "DB_USERNAME": "controleCelulas_owner",
-      "DB_PASSWORD": "ZI0nE2ySqope"
     }
   }
